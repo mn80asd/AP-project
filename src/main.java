@@ -221,9 +221,9 @@ public class main {
         }
     }
     private void unfollowPerson(person personToUnfollow){
-        if (){
+        if (currentUser.removePersonFromFollowings(personToUnfollow)){
             System.out.println("This person removed from your followings successfully.");
-
+            System.out.println(currentUser.getFollowings());
             homePage();
         }
         else{

@@ -43,7 +43,7 @@ public class person {
         return true;
     }
     public boolean removePersonFromFollowings(person personToRemoveFromFollowings){
-        this.followings.add(personToRemoveFromFollowings);
+        this.followings.remove(personToRemoveFromFollowings);
         return true;
     }
     public void addPostToUserPosts(Post newPost){
