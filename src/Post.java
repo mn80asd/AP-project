@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Post {
@@ -24,7 +25,7 @@ public class Post {
     public void addLikeToPost(){
         likeNumber+=1;
     }
-    public void addCommentToPost(Post p, String body, String personName){
+    public void addCommentToPost(Post p, String body,String personName){
         comments.put(personName,body);
     }
 

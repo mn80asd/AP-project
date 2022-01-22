@@ -42,6 +42,10 @@ public class person {
         this.followings.add(personToAddToFollowings);
         return true;
     }
+    public boolean removePersonFromFollowings(person personToRemoveFromFollowings){
+        this.followings.add(personToRemoveFromFollowings);
+        return true;
+    }
     public void addPostToUserPosts(Post newPost){
         peronPosts.add(newPost);
     }

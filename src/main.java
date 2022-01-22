@@ -349,6 +349,7 @@ public class main {
     private void showChatText(chat chat){
         chat.showThisChat();
     }
+
     private void selectChat(){
         while (true) {
             showAllUserChatList(currentUser);
