@@ -320,14 +320,7 @@ public class main {
                 startChatWithAPerson();
                 break;
             }
-            else if (userChatsInt == 2){
-                creatGroup();
-                break;
-            }
-            else if (userChatsInt == 3){
-                joinGroup();
-                break;
-            }
+
             else if (userChatsInt == 4){
                 selectChat();
                 break;
