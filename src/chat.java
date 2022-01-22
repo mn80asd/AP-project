@@ -1,9 +1,14 @@
 import java.util.ArrayList;
 
-public abstract class chat {
+public  class chat {
 
     private int id;
     private ArrayList <String> chatMessages =new ArrayList<>();
+    private person reciever;
+
+    public chat(person reciever) {
+        this.reciever = reciever;
+    }
 
     public int getId() {
         return id;
