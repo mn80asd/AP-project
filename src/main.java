@@ -8,7 +8,7 @@ public class main {
     HashMap<String,Integer> NamePassGroupMap = new HashMap<>();
     static person currentUser;
     public ArrayList<person> allPersons = new ArrayList<>();
-    public ArrayList<post> allPosts = new ArrayList<>();
+    public ArrayList<Post> allPosts = new ArrayList<>();
     public ArrayList<group> allGroups = new ArrayList<>();
     public static int helpId = 0;
 
@@ -225,7 +225,7 @@ public class main {
         while (true){
             System.out.println("Enter the id of the post you want to like.");
             int idToLike = myscanner.nextInt();
-            post p = getPostById(idToLike);
+            Post p = getPostById(idToLike);
             p.addLikeToPost();
             homePage();
             break;
@@ -238,7 +238,7 @@ public class main {
             System.out.println("Enter the id of the post you want to leave comment on.");
             int idToComment = myscanner.nextInt();
             myscanner.nextLine();
-            for (post p:allPosts) {
+            for (Post p:allPosts) {
                 if(getPostById(idToComment).equals(p)){
                     System.out.println("Enter the text of your comment.");
                     String commentBody = myscanner.nextLine();
@@ -252,8 +252,8 @@ public class main {
         }
 
     }
-    private post getPostById(int id){
-        for (post p:allPosts) {
+    private Post getPostById(int id){
+        for (Post p:allPosts) {
             if(id == p.getPostId()){
                 return p;
             }
@@ -284,7 +284,7 @@ public class main {
         String newPostName = myscanner.nextLine();
         System.out.println("Enter the description of the post that you want to creat.");
         String newPostDescription = myscanner.nextLine();
-        post newPost = new post(newPostName,newPostDescription);
+        Post newPost = new Post(newPostName,newPostDescription);
         currentUser.addPostToUserPosts(newPost);
         allPosts.add(newPost);
         userPage();

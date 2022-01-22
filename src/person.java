@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class person {
     public String name;
     public String bio;
-    private ArrayList <post> peronPosts = new ArrayList<>();
+    private ArrayList <Post> peronPosts = new ArrayList<>();
     private ArrayList <person> followers = new ArrayList<>();
     private ArrayList <person> followings = new ArrayList<>();
     private ArrayList <chat> allPersonChats = new ArrayList<>();
@@ -12,7 +12,7 @@ public class person {
         return name;
     }
 
-    public ArrayList<post> getPeronPosts() {
+    public ArrayList<Post> getPeronPosts() {
         return peronPosts;
     }
 
@@ -42,12 +42,12 @@ public class person {
         this.followings.add(personToAddToFollowings);
         return true;
     }
-    public void addPostToUserPosts(post newPost){
+    public void addPostToUserPosts(Post newPost){
         peronPosts.add(newPost);
     }
 
     public void showAllPostsOfUser(){
-        for (post p:peronPosts) {
+        for (Post p:peronPosts) {
             System.out.println(p);
         }
     }

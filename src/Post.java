@@ -1,7 +1,6 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
-public class post {
+public class Post {
     private static int helpIdPost=0;
     private final String name;
     private final String description;
@@ -9,7 +8,7 @@ public class post {
     private HashMap<String,String> comments = new HashMap<>();
     private int postId;
 
-    public post(String name, String description) {
+    public Post(String name, String description) {
         this.name = name;
         this.description = description;
         this.postId= helpIdPost++;
@@ -25,7 +24,7 @@ public class post {
     public void addLikeToPost(){
         likeNumber+=1;
     }
-    public void addCommentToPost(post p, String body,String personName){
+    public void addCommentToPost(Post p, String body, String personName){
         comments.put(personName,body);
     }
 
