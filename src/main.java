@@ -178,6 +178,14 @@ public class main {
                             System.out.println(p);
                             if(this.isFollowed(p)){
                                 System.out.println("----------you already followed this user.----------");
+                                System.out.println("Do you want to un follow this user?\n" +
+                                        "1- Yes    2- No");
+                                int wantToUnfollow = myscanner.nextInt();
+                                if (wantToUnfollow == 1){
+                                    unfollowPerson(p);
+                                    break;
+                                }
+                                break;
                             }
                             else{
                                 System.out.println("Do you want to follow this user?\n" +
@@ -360,7 +368,6 @@ public class main {
     private void showChatText(chat chat){
         chat.showThisChat();
     }
-
     private void selectChat(){
         while (true) {
             showAllUserChatList(currentUser);
