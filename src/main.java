@@ -220,6 +220,17 @@ public class main {
             homePage();
         }
     }
+    private void unfollowPerson(person personToUnfollow){
+        if (){
+            System.out.println("This person removed from your followings successfully.");
+
+            homePage();
+        }
+        else{
+            System.out.println("something is wrong. person is not removed from your followings.");
+            homePage();
+        }
+    }
     private void likeAPost(){
         Scanner myscanner = new Scanner(System.in);
         while (true){
