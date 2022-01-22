@@ -6,6 +6,10 @@ public  class chat {
     private ArrayList <String> chatMessages =new ArrayList<>();
     private person reciever;
 
+    public chat(person reciever) {
+        this.reciever = reciever;
+    }
+
     public int getId() {
         return id;
     }
