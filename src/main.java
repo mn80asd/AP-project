@@ -9,6 +9,7 @@ public class main {
     static person currentUser;
     public ArrayList<person> allPersons = new ArrayList<>();
     public ArrayList<Post> allPosts = new ArrayList<>();
+    public ArrayList<group> allGroups = new ArrayList<>();
     public static int helpId = 0;
 
     public static void main(String[] args) {
@@ -309,7 +310,14 @@ public class main {
                 startChatWithAPerson();
                 break;
             }
-
+            else if (userChatsInt == 2){
+                creatGroup();
+                break;
+            }
+            else if (userChatsInt == 3){
+                joinGroup();
+                break;
+            }
             else if (userChatsInt == 4){
                 selectChat();
                 break;
@@ -331,9 +339,9 @@ public class main {
                     for (person p:allPersons) {
                         if (p.name.equals(personNameStartChat)){
                             System.out.println(p);
-                            chat newChat = new chat(p);
-                            showChatText(newChat);
-                            writeMessageInChat(newChat);
+                            privateChat newPV = new privateChat(p);
+                            showChatText(newPV);
+                            writeMessageInChat(newPV);
                         }
                     }
                     break;
@@ -349,7 +357,70 @@ public class main {
     private void showChatText(chat chat){
         chat.showThisChat();
     }
-
+    private void creatGroup(){
+        while (true){
+            System.out.println("Enter the name of the group you want to creat. Enter <back> to back.\n");
+            Scanner myscanner = new Scanner(System.in);
+            String groupNameToCreat = myscanner.nextLine();
+            if(groupNameToCreat.equals("back")){
+                userChatsPage();
+                break;
+            }
+            if(!NamePassGroupMap.containsKey(groupNameToCreat)){
+                System.out.println("Enter a password for your group (contains just numbers)");
+                int groupPasswordToCreat = myscanner.nextInt();
+                myscanner.nextLine();
+                UserPassMap.put(groupNameToCreat,groupPasswordToCreat);
+                group newGroup = new group(groupNameToCreat);
+                newGroup.setAdmin(currentUser);
+                newGroup.setId(helpId++);
+                allGroups.add(newGroup);
+                System.out.println("your group created successfully\n" +
+                        ".now you can share the name of group and it's password to others, then they can join.");
+                userChatsPage();
+                break;
+            }
+            else{
+                System.out.println("This name is taken before. choose another name");
+                continue;
+            }
+        }
+    }
+    private void joinGroup(){
+        while (true){
+            Scanner myscanner = new Scanner(System.in);
+            System.out.println("Enter the name of the group you want to join. Enter <back> to back.\n");
+            String groupNameToJoin = myscanner.nextLine();
+            if(groupNameToJoin.equals("back")){
+                userChatsPage();
+                break;
+            }
+            if(NamePassGroupMap.containsKey(groupNameToJoin)) {
+                System.out.println("Enter the group password.");
+                int groupPasswordToJoin = myscanner.nextInt();
+                myscanner.nextLine();
+                if (groupPasswordToJoin == UserPassMap.get(groupNameToJoin)) {
+                    group groupToJoin = getGroupByName(groupNameToJoin);
+                    groupToJoin.addMemberToGroup(currentUser);
+                    System.out.println("you are joined to the group successfully.");
+                    userChatsPage();
+                    break;
+                }
+            }
+            else{
+                System.out.println("This group name dosn't exist. try again.");
+                continue;
+            }
+        }
+    }
+    private group getGroupByName(String name){
+        for (group g:allGroups) {
+            if(g.getName().equals(name)){
+                return g;
+            }
+        }
+        return null;
+    }
     private void selectChat(){
         while (true) {
             showAllUserChatList(currentUser);
