@@ -176,23 +176,39 @@ public class main {
                     for (person p:allPersons) {
                         if (p.name.equals(nameToSearch)){
                             System.out.println(p);
-                            if(this.isFollowed(p)){
+                            if(this.isFollowed(p) & !this.isBlocked(p)){
                                 System.out.println("----------you already followed this user.----------");
-                                System.out.println("Do you want to un follow this user?\n" +
-                                        "1- Yes    2- No");
-                                int wantToUnfollow = myscanner.nextInt();
-                                if (wantToUnfollow == 1){
+                                System.out.println("1- unfollow  2- block\n");
+                                int wantToUnfollowOrBlock = myscanner.nextInt();
+                                if (wantToUnfollowOrBlock == 1){
                                     unfollowPerson(p);
+                                    break;
+                                }
+                                else if (wantToUnfollowOrBlock == 2){
+                                    blockPerson(p);
                                     break;
                                 }
                                 break;
                             }
-                            else{
-                                System.out.println("Do you want to follow this user?\n" +
-                                        "1- Yes    2- No");
-                                int wantToFollow = myscanner.nextInt();
-                                if(wantToFollow == 1){
+                            else if(!this.isFollowed(p) & !this.isBlocked(p)){
+                                System.out.println("1- follow  2- block\n");
+                                int wantToFollowOrBlock = myscanner.nextInt();
+                                if(wantToFollowOrBlock == 1){
                                     followPerson(p);
+                                    break;
+                                } else if (wantToFollowOrBlock == 2) {
+                                    blockPerson(p);
+                                    break;
+                                }
+                                break;
+                            }
+                            else {
+                                System.out.println("-------------This user is already blocked------------");
+                                System.out.println("Do you want to unblock this user?" +
+                                        "1- yes     2- no");
+                                int toBlock = myscanner.nextInt();
+                                if(toBlock == 1){
+                                    unBlockPerson(p);
                                     break;
                                 }
                                 break;
@@ -211,6 +227,14 @@ public class main {
     private boolean isFollowed(person personToFind){
         for (person personToSearchInCurrentUserFollowings:currentUser.getFollowings()) {
             if(personToFind.equals(personToSearchInCurrentUserFollowings)){
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean isBlocked(person personToFind){
+        for (person personToSearchInCurrentUserBlockedList:currentUser.getBlockedUsers()) {
+            if(personToFind.equals(personToSearchInCurrentUserBlockedList)){
                 return true;
             }
         }
@@ -237,6 +261,28 @@ public class main {
             System.out.println("something is wrong. person is not removed from your followings.");
         }
         homePage();
+    }
+    private void blockPerson(person personToBlock){
+        if(this.isFollowed(personToBlock)){
+            unfollowPerson(personToBlock);
+        }
+        if (currentUser.addPersonToBlockList(personToBlock)){
+            System.out.println("This person blocked successfully.");
+            homePage();
+        }
+        else{
+            System.out.println("something is wrong. person is not blocked.");
+            homePage();
+        }
+    }
+    private void unBlockPerson(person personToUnBlock){
+        if(currentUser.removePersonFromBlockList(personToUnBlock)){
+            System.out.println("The person un blocked successfully.");
+            homePage();
+        }
+        else {
+            System.out.println("something is wrong. person is still in block list.");
+        }
     }
     private void likeAPost(){
         Scanner myscanner = new Scanner(System.in);

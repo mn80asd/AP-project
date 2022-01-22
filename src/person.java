@@ -7,9 +7,14 @@ public class person {
     private ArrayList <person> followers = new ArrayList<>();
     private ArrayList <person> followings = new ArrayList<>();
     private ArrayList <chat> allPersonChats = new ArrayList<>();
+    private ArrayList <person> blockedUsers = new ArrayList<>();
 
     public String getName() {
         return name;
+    }
+
+    public ArrayList<person> getBlockedUsers() {
+        return blockedUsers;
     }
 
     public ArrayList<Post> getPeronPosts() {
@@ -34,6 +39,14 @@ public class person {
         return null;
     }
 
+    public boolean addPersonToBlockList(person personToBlock){
+        this.blockedUsers.add(personToBlock);
+        return true;
+    }
+    public boolean removePersonFromBlockList(person personToUnBlock){
+        this.blockedUsers.remove(personToUnBlock);
+        return true;
+    }
     public ArrayList<person> getFollowings() {
         return followings;
     }
