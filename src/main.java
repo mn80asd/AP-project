@@ -9,7 +9,6 @@ public class main {
     static person currentUser;
     public ArrayList<person> allPersons = new ArrayList<>();
     public ArrayList<Post> allPosts = new ArrayList<>();
-    public ArrayList<group> allGroups = new ArrayList<>();
     public static int helpId = 0;
 
     public static void main(String[] args) {
