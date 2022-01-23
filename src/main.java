@@ -280,34 +280,27 @@ public class main {
     }
     private void likeAPost(){
         Scanner myscanner = new Scanner(System.in);
-        while (true){
-            System.out.println("Enter the id of the post you want to like.");
-            int idToLike = myscanner.nextInt();
-            Post p = getPostById(idToLike);
-            p.addLikeToPost();
-            homePage();
-            break;
-        }
-
+        System.out.println("Enter the id of the post you want to like.");
+        int idToLike = myscanner.nextInt();
+        Post p = getPostById(idToLike);
+        p.addLikeToPost();
+        homePage();
     }
     private void commentOnAPost(){
         Scanner myscanner = new Scanner(System.in);
-        while (true){
-            System.out.println("Enter the id of the post you want to leave comment on.");
-            int idToComment = myscanner.nextInt();
-            myscanner.nextLine();
-            for (Post p:allPosts) {
-                if(getPostById(idToComment).equals(p)){
-                    System.out.println("Enter the text of your comment.");
-                    String commentBody = myscanner.nextLine();
-                    p.addCommentToPost(p,commentBody,currentUser.getName());
-                    System.out.println("comment successfully added.");
-                    break;
-                }
+        System.out.println("Enter the id of the post you want to leave comment on.");
+        int idToComment = myscanner.nextInt();
+        myscanner.nextLine();
+        for (Post p:allPosts) {
+            if(getPostById(idToComment).equals(p)){
+                System.out.println("Enter the text of your comment.");
+                String commentBody = myscanner.nextLine();
+                p.addCommentToPost(p,commentBody,currentUser.getName());
+                System.out.println("comment successfully added.");
+                break;
             }
-            homePage();
-            break;
         }
+        homePage();
 
     }
     private Post getPostById(int id){
@@ -426,29 +419,26 @@ public class main {
                 }
             }
         }
-
-
     }
+
     private void showChatText(Chat chat){
         chat.showThisChat();
     }
+
     private void selectChat(){
-        while (true) {
-            showAllUserChatList(currentUser);
-            System.out.println("Enter the id of the Chat you want to see.\n0- back\n");
-            Scanner myscanner = new Scanner(System.in);
-            int idChatInt = myscanner.nextInt();
-            if ( idChatInt == 0){
-                userChatsPage();
-                break;
-            }
-            else {
-                Chat selectedChat = currentUser.getChatById(idChatInt);
-                System.out.println(selectedChat);
-                break;
-            }
+        showAllUserChatList(currentUser);
+        System.out.println("Enter the id of the Chat you want to see.\n0- back\n");
+        Scanner myscanner = new Scanner(System.in);
+        int idChatInt = myscanner.nextInt();
+        if ( idChatInt == 0){
+            userChatsPage();
+        }
+        else {
+            Chat selectedChat = currentUser.getChatById(idChatInt);
+            System.out.println(selectedChat);
         }
     }
+
     private void showAllUserChatList(Person person){
         person.showAllUserChats();
     }
