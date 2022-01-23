@@ -142,53 +142,36 @@ public class Media {
                     System.out.println("\tThere is not any option for your input. ⛔");
                     break;
             }
-            if (menu_chosen_task == 0){
-                beginPerson();
-                break;
-            }
-            else if (menu_chosen_task == 1){
-                homePage();
-                break;
-            }
-            else if (menu_chosen_task == 2){
-                userPage();
-                break;
-            }
-            else if (menu_chosen_task == 3){
-                userChatsPage();
-                break;
-            }
-            else{
-                System.out.println("\tThere is not any option for your input. ⛔");
-            }
         }
     }
     private void homePage()throws Exception{
         while (true){
             System.out.println("\tEnter the number of your chosen task.");
-            System.out.println("\t\t0- back");
-            System.out.println("\t\t1- Search for a Person page");
-            System.out.println("\t\t2- Like a post");
-            System.out.println("\t\t3- Comment on a post");
+            System.out.println("\t\t1- Search for a Person page \uD83D\uDD0E");
+            System.out.println("\t\t2- Like a post ❤");
+            System.out.println("\t\t3- Comment on a post ☁️");
+            System.out.println("\t\t4- Back");
+
             if (!currentUser.getFollowings().isEmpty()) {
                 showLastPosts();
             }
             int homePageInt = scanner.nextInt();
-            if (homePageInt == 0) {
-                mainMenu();
-                break;
-            }
-            else if (homePageInt == 1){
-                searchForAPersonPage();
-                break;
-            }
-            else if (homePageInt == 2){
-                likeAPost();
-                break;
-            }
-            else if (homePageInt == 3){
-                commentOnAPost();
-                break;
+            switch (homePageInt){
+                case 1:
+                    searchForAPersonPage();
+                    break;
+                case 2:
+                    likeAPost();
+                    break;
+                case 3:
+                    commentOnAPost();
+                    break;
+                case 4:
+                    mainMenu();
+                    break;
+                default:
+                    System.out.println("\tThere is not any option for your input. ⛔");
+                    return;
             }
         }
     }
@@ -202,9 +185,9 @@ public class Media {
     }
     private void searchForAPersonPage()throws Exception{
         while (true){
-            System.out.println("Enter the name of the Person you want.\n Enter <back> to back.");
+            System.out.print("\tEnter username of your goal Person(or enter 'cancel' to stop searching): ");
             String nameToSearch = scanner.nextLine();
-            if (nameToSearch.equals("back")){
+            if (nameToSearch.equals("cancel")){
                 homePage();
                 break;
             }
@@ -215,8 +198,9 @@ public class Media {
                         if (p.name.equals(nameToSearch)){
                             System.out.println(p);
                             if(this.isFollowed(p) & this.isBlocked(p)){
-                                System.out.println("----------you already followed this user.----------");
-                                System.out.println("1- unfollow  2- block\n");
+                                System.out.println("\tYou have already followed this user. \uD83E\uDD28");
+                                System.out.println("\t\t1- Unfollow");
+                                System.out.println("\t\t2- Block");
                                 int wantToUnfollowOrBlock = scanner.nextInt();
                                 if (wantToUnfollowOrBlock == 1){
                                     unfollowPerson(p);
@@ -229,7 +213,8 @@ public class Media {
                                 break;
                             }
                             else if(!this.isFollowed(p) & this.isBlocked(p)){
-                                System.out.println("1- follow  2- block\n");
+                                System.out.println("\t\t1- Follow");
+                                System.out.println("\t\t2- Block");
                                 int wantToFollowOrBlock = scanner.nextInt();
                                 if(wantToFollowOrBlock == 1){
                                     followPerson(p);
@@ -241,9 +226,10 @@ public class Media {
                                 break;
                             }
                             else {
-                                System.out.println("-------------This user is already blocked------------");
-                                System.out.println("Do you want to unblock this user?" +
-                                        "1- yes     2- no");
+                                System.out.println("\tYou have already followed this user. \uD83E\uDD28");
+                                System.out.println("\tDo you want to unblock this user? \uD83D\uDE42");
+                                System.out.println("\t\t1- Yes");
+                                System.out.println("\t\t2- No");
                                 int toBlock = scanner.nextInt();
                                 if(toBlock == 1){
                                     unBlockPerson(p);
@@ -256,13 +242,13 @@ public class Media {
                     break;
                 }
                 else {
-                    System.out.println("this name doesn't exist. try again.");
+                    System.out.println("\tThis username doesn't exist! Try Again. ⛔");
                 }
             }
         }
         homePage();
     }
-    private boolean isFollowed(Person personToFind)throws Exception{
+    private boolean isFollowed(Person personToFind){
         for (Person personToSearchInCurrentUserFollowings:currentUser.getFollowings()) {
             if(personToFind.equals(personToSearchInCurrentUserFollowings)){
                 return true;
@@ -317,7 +303,7 @@ public class Media {
             homePage();
         }
         else {
-            System.out.println("something is wrong. Person is still in block list.");
+            System.out.println("something went wrong. Person is still in block list.");
         }
     }
     private void likeAPost()throws Exception{
