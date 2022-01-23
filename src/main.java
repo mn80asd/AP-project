@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -343,15 +344,41 @@ public class main {
         }
     }
     private void creatNewPost(){
+        TypeOfMedia typeOfMedia;
         Scanner myscanner = new Scanner(System.in);
-        System.out.println("Enter the name of the post you want to creat.");
-        String newPostName = myscanner.nextLine();
-        System.out.println("Enter the description of the post that you want to creat.");
-        String newPostDescription = myscanner.nextLine();
-        Post newPost = new Post(newPostName,newPostDescription);
-        currentUser.addPostToUserPosts(newPost);
-        allPosts.add(newPost);
-        userPage();
+        while (true){
+
+            System.out.println("Enter the name of the post you want to creat. enter <back> to back.");
+            String newPostName = myscanner.nextLine();
+            if(newPostName.equals("back")){
+                userPage();
+                break;
+            }
+            System.out.println("enter the type of media you want to post.\n1- image  2- gif  3- video");
+            int typeOfMediaInt = myscanner.nextInt();
+            myscanner.nextLine();
+
+            if(typeOfMediaInt == 1){
+                typeOfMedia = TypeOfMedia.IMAGE;
+            }
+            else if(typeOfMediaInt == 2){
+                typeOfMedia = TypeOfMedia.GIF;
+            }
+            else if(typeOfMediaInt == 3){
+                typeOfMedia = TypeOfMedia.VIDEO;
+            }
+            else {
+                System.out.println("you should enter a number from 1 to 3. please try again.");
+                continue;
+            }
+            System.out.println("Enter the description of the post that you want to creat.");
+            String newPostDescription = myscanner.nextLine();
+            Post newPost = new Post(newPostName,newPostDescription, typeOfMedia);
+            currentUser.addPostToUserPosts(newPost);
+            allPosts.add(newPost);
+            userPage();
+        }
+
     }
     private void showUserPostsInUserPage(person person){
         person.showAllPostsOfUser();
