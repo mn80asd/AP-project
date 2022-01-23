@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public  class chat {
+public  class Chat {
 
     private int id;
     private ArrayList <String> chatMessages =new ArrayList<>();
     private Person reciever;
 
-    public chat(Person reciever) {
+    public Chat(Person reciever) {
         this.reciever = reciever;
     }
 
@@ -29,8 +29,8 @@ public  class chat {
     @Override
     public String toString() {
         return "Chat {" +
-                "chat id= "+ id +
-                ", chat messages= " + chatMessages +
+                "Chat id= "+ id +
+                ", Chat messages= " + chatMessages +
                 '}';
     }
 }

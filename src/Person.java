@@ -6,7 +6,7 @@ public class Person {
     private ArrayList <Post> peronPosts = new ArrayList<>();
     private ArrayList <Person> followers = new ArrayList<>();
     private ArrayList <Person> followings = new ArrayList<>();
-    private ArrayList <chat> allPersonChats = new ArrayList<>();
+    private ArrayList <Chat> allPersonChats = new ArrayList<>();
     private ArrayList <Person> blockedUsers = new ArrayList<>();
 
     public String getName() {
@@ -26,12 +26,12 @@ public class Person {
         this.bio = bio;
     }
     public void showAllUserChats(){
-        for (chat c:allPersonChats) {
+        for (Chat c:allPersonChats) {
             System.out.println(c);
         }
     }
-    public chat getChatById(int idToGetChat){
-        for (chat c:allPersonChats) {
+    public Chat getChatById(int idToGetChat){
+        for (Chat c:allPersonChats) {
             if(c.getId() == idToGetChat){
                 return c;
             }

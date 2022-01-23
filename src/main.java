@@ -385,8 +385,8 @@ public class main {
     private void userChatsPage(){
         showAllUserChatList(currentUser);
         while(true){
-            System.out.println("1- Start chat with a Person\n" +
-                    "2- Select a chat\n" +
+            System.out.println("1- Start Chat with a Person\n" +
+                    "2- Select a Chat\n" +
                     "0- back");
             Scanner myscanner = new Scanner(System.in);
             int userChatsInt = myscanner.nextInt();
@@ -408,7 +408,7 @@ public class main {
     private void startChatWithAPerson(){
         Scanner myscanner = new Scanner(System.in);
         while (true){
-            System.out.println("Enter the name of the Person you want to start chat with. Enter <back> to back.");
+            System.out.println("Enter the name of the Person you want to start Chat with. Enter <back> to back.");
             String personNameStartChat = myscanner.nextLine();
             if(personNameStartChat.equals("back")){
                 userChatsPage();
@@ -420,7 +420,7 @@ public class main {
                     for (Person p: allPeople) {
                         if (p.name.equals(personNameStartChat)){
                             System.out.println(p);
-                            chat newChat = new chat(p);
+                            Chat newChat = new Chat(p);
                             showChatText(newChat);
                             writeMessageInChat(newChat);
                         }
@@ -435,13 +435,13 @@ public class main {
 
 
     }
-    private void showChatText(chat chat){
+    private void showChatText(Chat chat){
         chat.showThisChat();
     }
     private void selectChat(){
         while (true) {
             showAllUserChatList(currentUser);
-            System.out.println("Enter the id of the chat you want to see.\n0- back\n");
+            System.out.println("Enter the id of the Chat you want to see.\n0- back\n");
             Scanner myscanner = new Scanner(System.in);
             int idChatInt = myscanner.nextInt();
             if ( idChatInt == 0){
@@ -449,7 +449,7 @@ public class main {
                 break;
             }
             else {
-                chat selectedChat = currentUser.getChatById(idChatInt);
+                Chat selectedChat = currentUser.getChatById(idChatInt);
                 System.out.println(selectedChat);
                 break;
             }
@@ -458,7 +458,7 @@ public class main {
     private void showAllUserChatList(Person person){
         person.showAllUserChats();
     }
-    private void writeMessageInChat(chat chat){
+    private void writeMessageInChat(Chat chat){
         Scanner myscanner = new Scanner(System.in);
         System.out.println("Write the text you want to send. if you want to stop chating, enter <end>.");
         while (true){
