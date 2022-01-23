@@ -236,12 +236,11 @@ public class Media {
         if(currentUser.addPersonToFollowings(personToFollow) & personToFollow.addPersonToFollowers(currentUser)){
             System.out.println("This Person added to your followings successfully.");
             System.out.println(currentUser.getFollowings());
-            homePage();
         }
         else {
             System.out.println("something is wrong. Person is not added to your followings.");
-            homePage();
         }
+        homePage();
     }
     private void unfollowPerson(Person personToUnfollow){
         if(currentUser.removePersonFromFollowings(personToUnfollow) & personToUnfollow.removePersonFromFollowers(currentUser)){
@@ -260,12 +259,11 @@ public class Media {
         }
         if (currentUser.addPersonToBlockList(personToBlock)){
             System.out.println("This Person blocked successfully.");
-            homePage();
         }
         else{
             System.out.println("something is wrong. Person is not blocked.");
-            homePage();
         }
+        homePage();
     }
     private void unBlockPerson(Person personToUnBlock){
         if(currentUser.removePersonFromBlockList(personToUnBlock)){
