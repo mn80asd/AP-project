@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Post {
+    private TypeOfMedia type;
     private static int helpIdPost=0;
     private final String name;
     private final String description;
@@ -9,10 +10,12 @@ public class Post {
     private HashMap<String,String> comments = new HashMap<>();
     private int postId;
 
-    public Post(String name, String description) {
+    public Post(String name, String description, TypeOfMedia mediaType) {
         this.name = name;
         this.description = description;
+        this.type = mediaType;
         this.postId= helpIdPost++;
+
     }
 
     public int getPostId() {
@@ -31,12 +34,13 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post {" +
-                "post id= "+ postId+
-                ", name= " + name +
-                ", description= " + description +
-                ", like number= "+ likeNumber +
-                ", comments= "+ comments+
-                '}';
+        return "Post " +
+                "\nid= "+ postId+
+                "\n     name= " + name +
+                "\n         type= " + type +
+                "\n             description= " + description +
+                "\n                 like number= "+ likeNumber +
+                "\n                     comments= "+ comments+
+                ' ';
     }
 }
