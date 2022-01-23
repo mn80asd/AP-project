@@ -3,18 +3,18 @@ import java.util.HashMap;
 
 public class Post {
     private final TypeOfMedia type;
-    private static int helpIdPost=0;
+    private static int help_id_post = 0;
     private final String name;
     private final String description;
-    private int likeNumber;
+    private int likes_num;
     public HashMap<String,String> comments = new HashMap<>();
     private int postId;
 
-    public Post(String name, String description, TypeOfMedia mediaType) {
+    public Post(String name, String description, TypeOfMedia media_type) {
         this.name = name;
         this.description = description;
-        this.type = mediaType;
-        this.postId= helpIdPost++;
+        this.type = media_type;
+        this.postId = help_id_post++;
 
     }
 
@@ -26,7 +26,7 @@ public class Post {
         this.postId = postId;
     }
     public void addLikeToPost(){
-        likeNumber+=1;
+        likes_num+=1;
     }
     public void addCommentToPost(Post p, String body,String personName){
         comments.put(personName,body);
@@ -38,7 +38,7 @@ public class Post {
                 "\n     name= " + name +
                 "\n         type= " + type +
                 "\n             description= " + description +
-                "\n                 like number= "+ likeNumber +
+                "\n                 like number= "+ likes_num +
                 "\n                     comments= "+ comments+
                 ' ';
     }

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public  class Chat {
 
     private int id;
-    public ArrayList<String> chatMessages =new ArrayList<>();
+    public ArrayList<String> chat_messages =new ArrayList<>();
     public Person receiver;
 
     public Chat(Person receiver) {
@@ -17,11 +17,11 @@ public  class Chat {
     public void setId(int id) {
         this.id = id;
     }
-    public void addMessageToChat(String messageToAdd){
-        chatMessages.add(messageToAdd);
+    public void add_message_to_chat(String message_to_add){
+        chat_messages.add(message_to_add);
     }
-    public void showThisChat(){
-        for (String s:chatMessages) {
+    public void show_this_chat(){
+        for (String s:chat_messages) {
             System.out.println(s);
         }
     }
@@ -30,7 +30,7 @@ public  class Chat {
     public String toString() {
         return "Chat :" +
                 "\n     id= "+ id +
-                "\n         Chat messages= " + chatMessages +
+                "\n         Chat messages= " + chat_messages +
                 ' ';
     }
 }
