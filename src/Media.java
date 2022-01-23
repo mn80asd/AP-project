@@ -30,7 +30,7 @@ public class Media {
             switch (loginOrSignUp){
                 case 1:
                     if (allPeople.isEmpty()){
-                        System.out.println("\n\tThere isn't any registered account. ⛔️");
+                        System.out.println("\tThere isn't any registered account. ⛔️");
                         continue;
                     }
                     else {
@@ -48,20 +48,18 @@ public class Media {
         }
     }
     private void loginPerson()throws Exception{
-        String username;
-        String password;
         while (true) {
-            System.out.println("enter your username.\nEnter <logout> to logout");
-            username = scanner.nextLine();
-            if(username.equals("logout")){
+            System.out.print("\tEnter your username(Enter 'cancel' if you are regretful): ");
+            String username = scanner.nextLine();
+            if(username.equals("cancel")){
                 beginPerson();
                 break;
             }
             if (UserPassMap.containsKey(username)){
-                System.out.println("Enter your password.");
-                password = scanner.nextLine();
+                System.out.print("\tEnter your password: ");
+                String password = scanner.nextLine();
                 if(Objects.equals(password, UserPassMap.get(username))){
-                    System.out.println("you loggedIn successfully.");
+                    System.out.println("\tYou logged in successfully.");
                     for (Person p:allPeople) {
                         if(p.name.equals(username)){
                             currentUser = p;
@@ -72,31 +70,30 @@ public class Media {
                     break;
                 }
                 else {
-                    System.out.println("this password is incorrect. try again.");
+                    System.out.println("\tThis password is incorrect. ⛔");
                 }
             }
             else {
-                System.out.println("this UserName is incorrect. try again.");
+                System.out.println("\tThis username is incorrect. ⛔");
             }
         }
     }
     private void signUpPerson()throws Exception{
-        String username;
-        String password;
         while (true){
-            System.out.println("Enter your username.\nEnter <back> to back.");
+            System.out.print("\tEnter a username(Enter 'back' if you are regretful): ");
             String temp0 = scanner.nextLine();
-            username = scanner.nextLine();
+            String username = scanner.nextLine();
             if (username.equals("back")){
                 beginPerson();
                 break;
             }
             if (!UserPassMap.containsKey(username)){
-                System.out.println("Enter a password (contains just numbers)");
-                password = scanner.nextLine();
+                System.out.print("\tEnter a password: ");
+                String password = scanner.nextLine();
                 UserPassMap.put(username, String.valueOf(password));
 
-                System.out.println("Enter a biography you want to show others who see your page.");
+                System.out.println("\tEnter bio of your account: ");
+                System.out.print("\t\t");
                 String setBio = scanner.nextLine();
 
                 Person newPerson = new Person(username,setBio);
