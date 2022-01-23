@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.*;
 
 public class Media {
     HashMap<String,Integer> UserPassMap = new HashMap<>();
@@ -10,16 +11,17 @@ public class Media {
     public ArrayList<Person> allPeople = new ArrayList<>();
     public ArrayList<Post> allPosts = new ArrayList<>();
     public static int helpId = 0;
+    static Scanner scanner = new Scanner(System.in);
+
 
     public static void main(String[] args) {
         Media myInsta = new Media();
         myInsta.beginPerson();
     }
     private void beginPerson(){
-        Scanner myscanner = new Scanner(System.in);
         while (true){
             System.out.println("Welcome to Instagram\nEnter 1 if you already have an account \nEnter 2 to SignUp\n");
-            int loginOrSignUp = myscanner.nextInt();
+            int loginOrSignUp = scanner.nextInt();
 
             if (loginOrSignUp == 1){
                 loginPerson();
@@ -35,17 +37,16 @@ public class Media {
         }
     }
     private void loginPerson(){
-        Scanner myscanner = new Scanner(System.in);
         while (true) {
             System.out.println("enter your username.\nEnter <logout> to logout");
-            String userName = myscanner.nextLine();
+            String userName = scanner.nextLine();
             if(userName.equals("logout")){
                 beginPerson();
                 break;
             }
             if (UserPassMap.containsKey(userName)){
                 System.out.println("Enter your password.");
-                int password = myscanner.nextInt();
+                int password = scanner.nextInt();
                 if(password == UserPassMap.get(userName)){
                     System.out.println("you loggedIn successfully.");
                     for (Person p: allPeople) {
@@ -67,22 +68,21 @@ public class Media {
         }
     }
     private void signUpPerson(){
-        Scanner myscanner = new Scanner(System.in);
         while (true){
             System.out.println("Enter your username.\nEnter <back> to back.");
-            String fullName = myscanner.nextLine();
+            String fullName = scanner.nextLine();
             if (fullName.equals("back")){
                 beginPerson();
                 break;
             }
             if (!UserPassMap.containsKey(fullName)){
                 System.out.println("Enter a password (contains just numbers)");
-                int password = myscanner.nextInt();
-                myscanner.nextLine();
+                int password = scanner.nextInt();
+                scanner.nextLine();
                 UserPassMap.put(fullName,password);
 
                 System.out.println("Enter a biography you want to show others who see your page.");
-                String setBio = myscanner.nextLine();
+                String setBio = scanner.nextLine();
 
                 Person newPerson = new Person(fullName,setBio);
                 allPeople.add(newPerson);
@@ -101,8 +101,7 @@ public class Media {
                     "1- Home page\n" +
                     "2- My page\n" +
                     "3- My chats\n");
-            Scanner myscanner = new Scanner(System.in);
-            int menoInt = myscanner.nextInt();
+            int menoInt = scanner.nextInt();
             if (menoInt == 0){
                 loginPerson();
                 break;
@@ -131,8 +130,7 @@ public class Media {
                     "3- Comment on a post\n" +
                     "0- back");
             showLastPosts();
-            Scanner myscanner = new Scanner(System.in);
-            int homePageInt = myscanner.nextInt();
+            int homePageInt = scanner.nextInt();
             if(homePageInt == 0){
                 mainMenu();
                 break;
@@ -157,10 +155,9 @@ public class Media {
         }
     }
     private void searchForAPersonPage(){
-        Scanner myscanner = new Scanner(System.in);
         while (true){
             System.out.println("Enter the name of the Person you want.\n Enter <back> to back.");
-            String nameToSearch = myscanner.nextLine();
+            String nameToSearch = scanner.nextLine();
             if (nameToSearch.equals("back")){
                 homePage();
                 break;
@@ -174,7 +171,7 @@ public class Media {
                             if(this.isFollowed(p) & !this.isBlocked(p)){
                                 System.out.println("----------you already followed this user.----------");
                                 System.out.println("1- unfollow  2- block\n");
-                                int wantToUnfollowOrBlock = myscanner.nextInt();
+                                int wantToUnfollowOrBlock = scanner.nextInt();
                                 if (wantToUnfollowOrBlock == 1){
                                     unfollowPerson(p);
                                     break;
@@ -187,7 +184,7 @@ public class Media {
                             }
                             else if(!this.isFollowed(p) & !this.isBlocked(p)){
                                 System.out.println("1- follow  2- block\n");
-                                int wantToFollowOrBlock = myscanner.nextInt();
+                                int wantToFollowOrBlock = scanner.nextInt();
                                 if(wantToFollowOrBlock == 1){
                                     followPerson(p);
                                     break;
@@ -201,7 +198,7 @@ public class Media {
                                 System.out.println("-------------This user is already blocked------------");
                                 System.out.println("Do you want to unblock this user?" +
                                         "1- yes     2- no");
-                                int toBlock = myscanner.nextInt();
+                                int toBlock = scanner.nextInt();
                                 if(toBlock == 1){
                                     unBlockPerson(p);
                                     break;
@@ -280,23 +277,21 @@ public class Media {
         }
     }
     private void likeAPost(){
-        Scanner myscanner = new Scanner(System.in);
         System.out.println("Enter the id of the post you want to like.");
-        int idToLike = myscanner.nextInt();
+        int idToLike = scanner.nextInt();
         Post p = getPostById(idToLike);
         p.addLikeToPost();
         homePage();
     }
 
     private void commentOnAPost(){
-        Scanner myscanner = new Scanner(System.in);
         System.out.println("Enter the id of the post you want to leave comment on.");
-        int idToComment = myscanner.nextInt();
-        myscanner.nextLine();
+        int idToComment = scanner.nextInt();
+        scanner.nextLine();
         for (Post p:allPosts) {
             if(Objects.equals(getPostById(idToComment), p)){
                 System.out.println("Enter the text of your comment.");
-                String commentBody = myscanner.nextLine();
+                String commentBody = scanner.nextLine();
                 p.addCommentToPost(p,commentBody,currentUser.getName());
                 System.out.println("comment successfully added.");
                 break;
@@ -319,8 +314,7 @@ public class Media {
         while (true){
             System.out.println("1- Creat new post\n" +
                     "0- back\n" );
-            Scanner myscanner = new Scanner(System.in);
-            int userPageInt = myscanner.nextInt();
+            int userPageInt = scanner.nextInt();
             if(userPageInt == 0){
                 mainMenu();
                 break;
@@ -334,18 +328,17 @@ public class Media {
     }
     private void creatNewPost(){
         TypeOfMedia typeOfMedia;
-        Scanner myscanner = new Scanner(System.in);
         while (true){
 
             System.out.println("Enter the name of the post you want to creat. enter <back> to back.");
-            String newPostName = myscanner.nextLine();
+            String newPostName = scanner.nextLine();
             if(newPostName.equals("back")){
                 userPage();
                 break;
             }
             System.out.println("enter the type of media you want to post.\n1- image  2- gif  3- video");
-            int typeOfMediaInt = myscanner.nextInt();
-            myscanner.nextLine();
+            int typeOfMediaInt = scanner.nextInt();
+            scanner.nextLine();
 
             if(typeOfMediaInt == 1){
                 typeOfMedia = TypeOfMedia.IMAGE;
@@ -361,7 +354,7 @@ public class Media {
                 continue;
             }
             System.out.println("Enter the description of the post that you want to creat.");
-            String newPostDescription = myscanner.nextLine();
+            String newPostDescription = scanner.nextLine();
             Post newPost = new Post(newPostName,newPostDescription, typeOfMedia);
             currentUser.addPostToUserPosts(newPost);
             allPosts.add(newPost);
@@ -378,8 +371,7 @@ public class Media {
             System.out.println("1- Start Chat with a Person\n" +
                     "2- Select a Chat\n" +
                     "0- back");
-            Scanner myscanner = new Scanner(System.in);
-            int userChatsInt = myscanner.nextInt();
+            int userChatsInt = scanner.nextInt();
             if(userChatsInt == 0){
                 mainMenu();
                 break;
@@ -396,10 +388,9 @@ public class Media {
         }
     }
     private void startChatWithAPerson(){
-        Scanner myscanner = new Scanner(System.in);
         while (true){
             System.out.println("Enter the name of the Person you want to start Chat with. Enter <back> to back.");
-            String personNameStartChat = myscanner.nextLine();
+            String personNameStartChat = scanner.nextLine();
             if(personNameStartChat.equals("back")){
                 userChatsPage();
                 break;
@@ -431,8 +422,7 @@ public class Media {
     private void selectChat(){
         showAllUserChatList(currentUser);
         System.out.println("Enter the id of the Chat you want to see.\n0- back\n");
-        Scanner myscanner = new Scanner(System.in);
-        int idChatInt = myscanner.nextInt();
+        int idChatInt = scanner.nextInt();
         if ( idChatInt == 0){
             userChatsPage();
         }
@@ -446,10 +436,9 @@ public class Media {
         person.showAllUserChats();
     }
     private void writeMessageInChat(Chat chat){
-        Scanner myscanner = new Scanner(System.in);
         System.out.println("Write the text you want to send. if you want to stop chating, enter <end>.");
         while (true){
-            String chatText = myscanner.nextLine();
+            String chatText = scanner.nextLine();
             if(chatText.equals("end")){
                 userChatsPage();
                 break;
