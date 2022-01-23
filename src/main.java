@@ -1,14 +1,16 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class main {
 
     HashMap<String,Integer> UserPassMap = new HashMap<>();
     HashMap<String,Integer> NamePassGroupMap = new HashMap<>();
-    static person currentUser;
-    public ArrayList<person> allPersons = new ArrayList<>();
+    static Person currentUser;
+    public ArrayList<Person> allPersons = new ArrayList<Person>();
     public ArrayList<Post> allPosts = new ArrayList<>();
+    // public ArrayList<group> allGroups = new ArrayList<>();
     public static int helpId = 0;
 
     public static void main(String[] args) {
@@ -49,7 +51,7 @@ public class main {
                 int password = myscanner.nextInt();
                 if(password == UserPassMap.get(userName)){
                     System.out.println("you loggedIn successfully.");
-                    for (person p:allPersons) {
+                    for (Person p:allPersons) {
                         if(p.name.equals(userName)){
                             currentUser = p;
                         }
@@ -87,7 +89,7 @@ public class main {
                 System.out.println("Enter a biography you want to show others who see your page.");
                 String setBio = myscanner.nextLine();
 
-                person newPerson = new person(fullName,setBio);
+                Person newPerson = new Person(fullName,setBio);
                 allPersons.add(newPerson);
                 System.out.println("you signedUp successfully.now you can login.");
                 loginPerson();
@@ -157,7 +159,7 @@ public class main {
         }
     }
     private void showLastPosts(){
-        for (person p:currentUser.getFollowings()) {
+        for (Person p:currentUser.getFollowings()) {
             System.out.println(p.getPeronPosts().get(p.getPeronPosts().size()-1));
         }
     }
@@ -173,42 +175,18 @@ public class main {
             else {
                 if(UserPassMap.containsKey(nameToSearch)){
                     System.out.println("user found.");
-                    for (person p:allPersons) {
+                    for (Person p:allPersons) {
                         if (p.name.equals(nameToSearch)){
                             System.out.println(p);
-                            if(this.isFollowed(p) & !this.isBlocked(p)){
+                            if(this.isFollowed(p)){
                                 System.out.println("----------you already followed this user.----------");
-                                System.out.println("1- unfollow  2- block\n");
-                                int wantToUnfollowOrBlock = myscanner.nextInt();
-                                if (wantToUnfollowOrBlock == 1){
-                                    unfollowPerson(p);
-                                    break;
-                                }
-                                else if (wantToUnfollowOrBlock == 2){
-                                    blockPerson(p);
-                                    break;
-                                }
-                                break;
                             }
-                            else if(!this.isFollowed(p) & !this.isBlocked(p)){
-                                System.out.println("1- follow  2- block\n");
-                                int wantToFollowOrBlock = myscanner.nextInt();
-                                if(wantToFollowOrBlock == 1){
+                            else{
+                                System.out.println("Do you want to follow this user?\n" +
+                                        "1- Yes    2- No");
+                                int wantToFollow = myscanner.nextInt();
+                                if(wantToFollow == 1){
                                     followPerson(p);
-                                    break;
-                                } else if (wantToFollowOrBlock == 2) {
-                                    blockPerson(p);
-                                    break;
-                                }
-                                break;
-                            }
-                            else {
-                                System.out.println("-------------This user is already blocked------------");
-                                System.out.println("Do you want to unblock this user?" +
-                                        "1- yes     2- no");
-                                int toBlock = myscanner.nextInt();
-                                if(toBlock == 1){
-                                    unBlockPerson(p);
                                     break;
                                 }
                                 break;
@@ -224,35 +202,27 @@ public class main {
         }
         homePage();
     }
-    private boolean isFollowed(person personToFind){
-        for (person personToSearchInCurrentUserFollowings:currentUser.getFollowings()) {
+    private boolean isFollowed(Person personToFind){
+        for (Person personToSearchInCurrentUserFollowings:currentUser.getFollowings()) {
             if(personToFind.equals(personToSearchInCurrentUserFollowings)){
                 return true;
             }
         }
         return false;
     }
-    private boolean isBlocked(person personToFind){
-        for (person personToSearchInCurrentUserBlockedList:currentUser.getBlockedUsers()) {
-            if(personToFind.equals(personToSearchInCurrentUserBlockedList)){
-                return true;
-            }
-        }
-        return false;
-    }
-    private void followPerson(person personToFollow){
-        if(currentUser.addPersonToFollowings(personToFollow) & personToFollow.addPersonToFollowers(currentUser)){
+    private void followPerson(Person personToFollow){
+        if(currentUser.addPersonToFollowings(personToFollow)){
             System.out.println("This person added to your followings successfully.");
             System.out.println(currentUser.getFollowings());
             homePage();
         }
         else {
             System.out.println("something is wrong. person is not added to your followings.");
-            homePage();
         }
+        homePage();
     }
-    private void unfollowPerson(person personToUnfollow){
-        if(currentUser.removePersonFromFollowings(personToUnfollow) & personToUnfollow.removePersonFromFollowers(currentUser)){
+    private void unfollowPerson(Person personToUnfollow){
+        if(currentUser.removePersonFromFollowings(personToUnfollow)){
             System.out.println("This person removed from your followings successfully.");
             System.out.println(currentUser.getFollowings());
             homePage();
@@ -261,28 +231,6 @@ public class main {
             System.out.println("something is wrong. person is not removed from your followings.");
         }
         homePage();
-    }
-    private void blockPerson(person personToBlock){
-        if(this.isFollowed(personToBlock)){
-            unfollowPerson(personToBlock);
-        }
-        if (currentUser.addPersonToBlockList(personToBlock)){
-            System.out.println("This person blocked successfully.");
-            homePage();
-        }
-        else{
-            System.out.println("something is wrong. person is not blocked.");
-            homePage();
-        }
-    }
-    private void unBlockPerson(person personToUnBlock){
-        if(currentUser.removePersonFromBlockList(personToUnBlock)){
-            System.out.println("The person un blocked successfully.");
-            homePage();
-        }
-        else {
-            System.out.println("something is wrong. person is still in block list.");
-        }
     }
     private void likeAPost(){
         Scanner myscanner = new Scanner(System.in);
@@ -303,7 +251,7 @@ public class main {
             int idToComment = myscanner.nextInt();
             myscanner.nextLine();
             for (Post p:allPosts) {
-                if(getPostById(idToComment).equals(p)){
+                if(Objects.equals(getPostById(idToComment), p)){
                     System.out.println("Enter the text of your comment.");
                     String commentBody = myscanner.nextLine();
                     p.addCommentToPost(p,commentBody,currentUser.getName());
@@ -353,7 +301,7 @@ public class main {
         allPosts.add(newPost);
         userPage();
     }
-    private void showUserPostsInUserPage(person person){
+    private void showUserPostsInUserPage(Person person){
         person.showAllPostsOfUser();
     }
     private void userChatsPage(){
@@ -374,7 +322,14 @@ public class main {
                 startChatWithAPerson();
                 break;
             }
-
+            else if (userChatsInt == 2){
+                creatGroup();
+                break;
+            }
+            else if (userChatsInt == 3){
+                joinGroup();
+                break;
+            }
             else if (userChatsInt == 4){
                 selectChat();
                 break;
@@ -393,12 +348,12 @@ public class main {
             else {
                 if(UserPassMap.containsKey(personNameStartChat)){
                     System.out.println("user found.");
-                    for (person p:allPersons) {
+                    for (Person p:allPersons) {
                         if (p.name.equals(personNameStartChat)){
                             System.out.println(p);
-                            chat newChat = new chat(p);
-                            showChatText(newChat);
-                            writeMessageInChat(newChat);
+                            privateChat newPV = new privateChat(p);
+                            showChatText(newPV);
+                            writeMessageInChat(newPV);
                         }
                     }
                     break;
@@ -411,9 +366,73 @@ public class main {
 
 
     }
-    private void showChatText(chat chat){
+    private void showChatText(Chat chat){
         chat.showThisChat();
     }
+    private void creatGroup(){
+        while (true){
+            System.out.println("Enter the name of the group you want to creat. Enter <back> to back.\n");
+            Scanner myscanner = new Scanner(System.in);
+            String groupNameToCreat = myscanner.nextLine();
+            if(groupNameToCreat.equals("back")){
+                userChatsPage();
+                break;
+            }
+            if(!NamePassGroupMap.containsKey(groupNameToCreat)){
+                System.out.println("Enter a password for your group (contains just numbers)");
+                int groupPasswordToCreat = myscanner.nextInt();
+                myscanner.nextLine();
+                UserPassMap.put(groupNameToCreat,groupPasswordToCreat);
+                group newGroup = new group(groupNameToCreat);
+                newGroup.setAdmin(currentUser);
+                newGroup.setId(helpId++);
+                allGroups.add(newGroup);
+                System.out.println("your group created successfully\n" +
+                        ".now you can share the name of group and it's password to others, then they can join.");
+                userChatsPage();
+                break;
+            }
+            else{
+                System.out.println("This name is taken before. choose another name");
+                continue;
+            }
+        }
+    }
+    private void joinGroup(){
+        while (true){
+            Scanner myscanner = new Scanner(System.in);
+            System.out.println("Enter the name of the group you want to join. Enter <back> to back.\n");
+            String groupNameToJoin = myscanner.nextLine();
+            if(groupNameToJoin.equals("back")){
+                userChatsPage();
+                break;
+            }
+            if(NamePassGroupMap.containsKey(groupNameToJoin)) {
+                System.out.println("Enter the group password.");
+                int groupPasswordToJoin = myscanner.nextInt();
+                myscanner.nextLine();
+                if (groupPasswordToJoin == UserPassMap.get(groupNameToJoin)) {
+                    group groupToJoin = getGroupByName(groupNameToJoin);
+                    groupToJoin.addMemberToGroup(currentUser);
+                    System.out.println("you are joined to the group successfully.");
+                    userChatsPage();
+                    break;
+                }
+            }
+            else{
+                System.out.println("This group name dosn't exist. try again.");
+                continue;
+            }
+        }
+    }
+    /*private group getGroupByName(String name){
+        for (group g:allGroups) {
+            if(g.getName().equals(name)){
+                return g;
+            }
+        }
+        return null;
+    }*/
     private void selectChat(){
         while (true) {
             showAllUserChatList(currentUser);
@@ -425,16 +444,16 @@ public class main {
                 break;
             }
             else {
-                chat selectedChat = currentUser.getChatById(idChatInt);
+                Chat selectedChat = currentUser.getChatById(idChatInt);
                 System.out.println(selectedChat);
                 break;
             }
         }
     }
-    private void showAllUserChatList(person person){
+    private void showAllUserChatList(Person person){
         person.showAllUserChats();
     }
-    private void writeMessageInChat(chat chat){
+    private void writeMessageInChat(Chat chat){
         Scanner myscanner = new Scanner(System.in);
         System.out.println("Write the text you want to send. if you want to stop chating, enter <end>.");
         while (true){

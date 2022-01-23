@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public  class chat {
+public  class Chat {
 
     private int id;
-    private ArrayList <String> chatMessages =new ArrayList<>();
-    private person reciever;
+    private ArrayList <String> chatMessages = new ArrayList<>();
+    private Person reciever;
 
-    public chat(person reciever) {
+    public Chat(Person reciever) {
         this.reciever = reciever;
     }
 
