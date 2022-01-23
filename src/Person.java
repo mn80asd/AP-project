@@ -47,7 +47,7 @@ public class Person {
         this.blockedUsers.remove(personToUnBlock);
         return true;
     }
-    public ArrayList<Person> getFollowings() {
+    public ArrayList<Person> getFollowings()throws Exception {
         return followings;
     }
 
