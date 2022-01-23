@@ -102,6 +102,12 @@ public class Media {
                 Person newPerson = new Person(username,setBio);
                 allPeople.add(newPerson);
                 System.out.println("you signedUp successfully.now you can login.");
+                for (Person p:allPeople) {
+                    if(p.name.equals(username)){
+                        currentUser = p;
+                        break;
+                    }
+                }
                 mainMenu();
                 break;
             }
@@ -144,9 +150,11 @@ public class Media {
                     "2- Like a post\n" +
                     "3- Comment on a post\n" +
                     "0- back");
-            showLastPosts();
+            if (!currentUser.getFollowings().isEmpty()) {
+                showLastPosts();
+            }
             int homePageInt = scanner.nextInt();
-            if(homePageInt == 0){
+            if (homePageInt == 0) {
                 mainMenu();
                 break;
             }
