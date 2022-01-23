@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Post {
-    private TypeOfMedia type;
+    private final TypeOfMedia type;
     private static int helpIdPost=0;
     private final String name;
     private final String description;
     private int likeNumber;
-    private HashMap<String,String> comments = new HashMap<>();
+    public HashMap<String,String> comments = new HashMap<>();
     private int postId;
 
     public Post(String name, String description, TypeOfMedia mediaType) {
