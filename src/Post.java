@@ -31,7 +31,6 @@ public class Post {
     public void addCommentToPost(Post p, String body,String personName){
         comments.put(personName,body);
     }
-    public void addLiToPost(){}
     @Override
     public String toString() {
         return "Post " +
