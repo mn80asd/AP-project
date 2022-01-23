@@ -3,11 +3,11 @@ import java.util.ArrayList;
 public class Person {
     public String name;
     public String bio;
-    private ArrayList <Post> peronPosts = new ArrayList<>();
-    private ArrayList <Person> followers = new ArrayList<>();
-    private ArrayList <Person> followings = new ArrayList<>();
-    private ArrayList <Chat> allPersonChats = new ArrayList<>();
-    private ArrayList <Person> blockedUsers = new ArrayList<>();
+    public ArrayList<Post> personPosts = new ArrayList<>();
+    public ArrayList<Person> followers = new ArrayList<>();
+    public ArrayList<Person> followings = new ArrayList<>();
+    public ArrayList<Chat> allPersonChats = new ArrayList<>();
+    public ArrayList<Person> blockedUsers = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -18,7 +18,7 @@ public class Person {
     }
 
     public ArrayList<Post> getPeronPosts() {
-        return peronPosts;
+        return personPosts;
     }
 
     public Person(String name, String bio) {
@@ -68,11 +68,11 @@ public class Person {
         return true;
     }
     public void addPostToUserPosts(Post newPost){
-        peronPosts.add(newPost);
+        personPosts.add(newPost);
     }
 
     public void showAllPostsOfUser(){
-        for (Post p:peronPosts) {
+        for (Post p:personPosts) {
             System.out.println(p);
         }
     }
