@@ -3,8 +3,8 @@ import java.util.ArrayList;
 public  class Chat {
 
     private int id;
-    private ArrayList <String> chatMessages =new ArrayList<>();
-    private Person receiver;
+    public ArrayList<String> chatMessages =new ArrayList<>();
+    public Person receiver;
 
     public Chat(Person receiver) {
         this.receiver = receiver;
