@@ -98,7 +98,7 @@ public class Media {
 
                 Person newPerson = new Person(username,setBio);
                 allPeople.add(newPerson);
-                System.out.println("you signedUp successfully.now you can login.");
+                System.out.println("\tYou signed up successfully. ✅");
                 for (Person p:allPeople) {
                     if(p.name.equals(username)){
                         currentUser = p;
