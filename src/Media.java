@@ -175,7 +175,7 @@ public class Media {
             }
         }
     }
-    private void showLastPosts()throws Exception{
+    private void showLastPosts(){
         if (currentUser.getFollowings().isEmpty()){
             return;
         }
@@ -407,11 +407,13 @@ public class Media {
     private void userChatsPage()throws Exception{
         showAllUserChatList(currentUser);
         while(true){
-            System.out.println("1- Start Chat with a Person\n" +
-                    "2- Select a Chat\n" +
-                    "0- back");
+            System.out.println("\tEnter the number of your chosen task.");
+            System.out.println("\t\t1- Start chat with a person");
+            System.out.println("\t\t2- Select a chat");
+            System.out.println("\t\t3- Back");
+
             int userChatsInt = scanner.nextInt();
-            if(userChatsInt == 0){
+            if(userChatsInt == 3){
                 mainMenu();
                 break;
             }
