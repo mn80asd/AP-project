@@ -241,7 +241,7 @@ public class main {
         return false;
     }
     private void followPerson(person personToFollow){
-        if(currentUser.addPersonToFollowings(personToFollow)){
+        if(currentUser.addPersonToFollowings(personToFollow) & personToFollow.addPersonToFollowers(currentUser)){
             System.out.println("This person added to your followings successfully.");
             System.out.println(currentUser.getFollowings());
             homePage();
@@ -252,7 +252,7 @@ public class main {
         }
     }
     private void unfollowPerson(person personToUnfollow){
-        if(currentUser.removePersonFromFollowings(personToUnfollow)){
+        if(currentUser.removePersonFromFollowings(personToUnfollow) & personToUnfollow.removePersonFromFollowers(currentUser)){
             System.out.println("This person removed from your followings successfully.");
             System.out.println(currentUser.getFollowings());
             homePage();

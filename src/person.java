@@ -55,6 +55,14 @@ public class person {
         this.followings.add(personToAddToFollowings);
         return true;
     }
+    public boolean addPersonToFollowers(person personToAddToFollowers){
+        this.followers.add(personToAddToFollowers);
+        return true;
+    }
+    public boolean removePersonFromFollowers(person personToRemoveFromFollowers){
+        this.followers.remove(personToRemoveFromFollowers);
+        return true;
+    }
     public boolean removePersonFromFollowings(person personToRemoveFromFollowings){
         this.followings.remove(personToRemoveFromFollowings);
         return true;
