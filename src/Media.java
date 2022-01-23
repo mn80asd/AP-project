@@ -48,6 +48,7 @@ public class Media {
                 default:
                     System.out.println("\tThere is not any option for your input. ⛔");
                     start_person();
+                    break;
             }
             break;
         }
