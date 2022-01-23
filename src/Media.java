@@ -13,29 +13,40 @@ public class Media {
     static Scanner scanner = new Scanner(System.in);
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Media myInsta = new Media();
         myInsta.beginPerson();
     }
-    private void beginPerson(){
+    private void beginPerson() throws Exception{
         while (true){
-            System.out.println("Welcome to Instagram\nEnter 1 if you already have an account \nEnter 2 to SignUp\n");
+            System.out.println();
+            System.out.println("\tWelcome to PARADOX media! ❤️️\uD83C\uDF89");
+            System.out.println("\tHope you have a good time here. \uD83E\uDDAD✨");
+            System.out.println();
+            System.out.println("\t\t1.Login");
+            System.out.println("\t\t2.Sign up");
+            System.out.println("\t\t3.Exit");
             int loginOrSignUp = scanner.nextInt();
-
-            if (loginOrSignUp == 1){
-                loginPerson();
-                break;
+            switch (loginOrSignUp){
+                case 1:
+                    if (allPeople.isEmpty()){
+                        System.out.println("\n\tThere isn't any registered account. ⛔\n️");
+                        continue;
+                    }
+                    else {
+                        loginPerson();
+                        break;
+                    }
+                case 2:
+                    signUpPerson();
+                    break;
+                default:
+                    System.out.println("\tThere is not any option for your input. ⛔");
             }
-            else if (loginOrSignUp == 2){
-                signUpPerson();
-                break;
-            }
-            else {
-                System.out.println("you should enter a number from 1 to 2");
-            }
+            break;
         }
     }
-    private void loginPerson(){
+    private void loginPerson()throws Exception{
         while (true) {
             System.out.println("enter your username.\nEnter <logout> to logout");
             String userName = scanner.nextLine();
@@ -66,7 +77,7 @@ public class Media {
             }
         }
     }
-    private void signUpPerson(){
+    private void signUpPerson()throws Exception{
         while (true){
             System.out.println("Enter your username.\nEnter <back> to back.");
             String fullName = scanner.nextLine();
@@ -94,7 +105,7 @@ public class Media {
             }
         }
     }
-    private void mainMenu(){
+    private void mainMenu()throws Exception{
         while (true){
             System.out.println("Enter the number of what you want. enter 0 to back.\n" +
                     "1- Home page\n" +
@@ -122,7 +133,7 @@ public class Media {
             }
         }
     }
-    private void homePage(){
+    private void homePage()throws Exception{
         while (true){
             System.out.println("1- Search for a Person page\n" +
                     "2- Like a post\n" +
@@ -153,7 +164,7 @@ public class Media {
             System.out.println(p.getPeronPosts().get(p.getPeronPosts().size()-1));
         }
     }
-    private void searchForAPersonPage(){
+    private void searchForAPersonPage()throws Exception{
         while (true){
             System.out.println("Enter the name of the Person you want.\n Enter <back> to back.");
             String nameToSearch = scanner.nextLine();
@@ -231,7 +242,7 @@ public class Media {
         }
         return true;
     }
-    private void followPerson(Person personToFollow){
+    private void followPerson(Person personToFollow)throws Exception{
         if(currentUser.addPersonToFollowings(personToFollow) & personToFollow.addPersonToFollowers(currentUser)){
             System.out.println("This Person added to your followings successfully.");
             System.out.println(currentUser.getFollowings());
@@ -241,7 +252,7 @@ public class Media {
         }
         homePage();
     }
-    private void unfollowPerson(Person personToUnfollow){
+    private void unfollowPerson(Person personToUnfollow)throws Exception{
         if(currentUser.removePersonFromFollowings(personToUnfollow) & personToUnfollow.removePersonFromFollowers(currentUser)){
             System.out.println("This Person removed from your followings successfully.");
             System.out.println(currentUser.getFollowings());
@@ -252,7 +263,7 @@ public class Media {
         }
         homePage();
     }
-    private void blockPerson(Person personToBlock){
+    private void blockPerson(Person personToBlock)throws Exception{
         if(this.isFollowed(personToBlock)){
             unfollowPerson(personToBlock);
         }
@@ -264,7 +275,7 @@ public class Media {
         }
         homePage();
     }
-    private void unBlockPerson(Person personToUnBlock){
+    private void unBlockPerson(Person personToUnBlock)throws Exception{
         if(currentUser.removePersonFromBlockList(personToUnBlock)){
             System.out.println("The Person un blocked successfully.");
             homePage();
@@ -273,7 +284,7 @@ public class Media {
             System.out.println("something is wrong. Person is still in block list.");
         }
     }
-    private void likeAPost(){
+    private void likeAPost()throws Exception{
         System.out.println("Enter the id of the post you want to like.");
         int idToLike = scanner.nextInt();
         Post p = getPostById(idToLike);
@@ -283,7 +294,7 @@ public class Media {
         homePage();
     }
 
-    private void commentOnAPost(){
+    private void commentOnAPost()throws Exception{
         System.out.println("Enter the id of the post you want to leave comment on.");
         int idToComment = scanner.nextInt();
         scanner.nextLine();
@@ -308,7 +319,7 @@ public class Media {
         }
         return null;
     }
-    private void userPage(){
+    private void userPage()throws Exception{
         showUserPostsInUserPage(currentUser);
         while (true){
             System.out.println("1- Creat new post\n" +
@@ -325,7 +336,7 @@ public class Media {
             }
         }
     }
-    private void creatNewPost(){
+    private void creatNewPost()throws Exception{
         TypeOfMedia typeOfMedia;
         while (true){
 
@@ -361,10 +372,12 @@ public class Media {
         }
 
     }
+
     private void showUserPostsInUserPage(Person person){
         person.showAllPostsOfUser();
     }
-    private void userChatsPage(){
+
+    private void userChatsPage()throws Exception{
         showAllUserChatList(currentUser);
         while(true){
             System.out.println("1- Start Chat with a Person\n" +
@@ -386,7 +399,7 @@ public class Media {
             }
         }
     }
-    private void startChatWithAPerson(){
+    private void startChatWithAPerson()throws Exception{
         while (true){
             System.out.println("Enter the name of the Person you want to start Chat with. Enter <back> to back.");
             String personNameStartChat = scanner.nextLine();
@@ -418,7 +431,7 @@ public class Media {
         chat.showThisChat();
     }
 
-    private void selectChat(){
+    private void selectChat()throws Exception{
         showAllUserChatList(currentUser);
         System.out.println("Enter the id of the Chat you want to see.\n0- back\n");
         int idChatInt = scanner.nextInt();
@@ -434,7 +447,7 @@ public class Media {
     private void showAllUserChatList(Person person){
         person.showAllUserChats();
     }
-    private void writeMessageInChat(Chat chat){
+    private void writeMessageInChat(Chat chat)throws Exception{
         System.out.println("Write the text you want to send. if you want to stop chating, enter <end>.");
         while (true){
             String chatText = scanner.nextLine();
