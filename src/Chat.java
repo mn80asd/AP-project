@@ -4,10 +4,10 @@ public  class Chat {
 
     private int id;
     private ArrayList <String> chatMessages =new ArrayList<>();
-    private Person reciever;
+    private Person receiver;
 
-    public Chat(Person reciever) {
-        this.reciever = reciever;
+    public Chat(Person receiver) {
+        this.receiver = receiver;
     }
 
     public int getId() {
