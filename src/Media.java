@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class Media {
-    HashMap<String,Integer> UserPassMap = new HashMap<>();
+    HashMap<String,String> UserPassMap = new HashMap<>();
     HashMap<String,Integer> NamePassGroupMap = new HashMap<>();
     static Person currentUser;
     public ArrayList<Person> allPeople = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Media {
             switch (loginOrSignUp){
                 case 1:
                     if (allPeople.isEmpty()){
-                        System.out.println("\n\tThere isn't any registered account. ⛔\n️");
+                        System.out.println("\n\tThere isn't any registered account. ⛔️");
                         continue;
                     }
                     else {
@@ -42,28 +42,31 @@ public class Media {
                     break;
                 default:
                     System.out.println("\tThere is not any option for your input. ⛔");
+                    beginPerson();
             }
             break;
         }
     }
     private void loginPerson()throws Exception{
+        String username;
+        String password;
         while (true) {
             System.out.println("enter your username.\nEnter <logout> to logout");
-            String userName = scanner.nextLine();
-            if(userName.equals("logout")){
+            username = scanner.nextLine();
+            if(username.equals("logout")){
                 beginPerson();
                 break;
             }
-            if (UserPassMap.containsKey(userName)){
+            if (UserPassMap.containsKey(username)){
                 System.out.println("Enter your password.");
-                int password = scanner.nextInt();
-                if(password == UserPassMap.get(userName)){
+                password = scanner.nextLine();
+                if(Objects.equals(password, UserPassMap.get(username))){
                     System.out.println("you loggedIn successfully.");
-                    for (Person p: allPeople) {
-                        if(p.name.equals(userName)){
+                    for (Person p:allPeople) {
+                        if(p.name.equals(username)){
                             currentUser = p;
+                            break;
                         }
-
                     }
                     mainMenu();
                     break;
@@ -78,26 +81,28 @@ public class Media {
         }
     }
     private void signUpPerson()throws Exception{
+        String username;
+        String password;
         while (true){
             System.out.println("Enter your username.\nEnter <back> to back.");
-            String fullName = scanner.nextLine();
-            if (fullName.equals("back")){
+            String temp0 = scanner.nextLine();
+            username = scanner.nextLine();
+            if (username.equals("back")){
                 beginPerson();
                 break;
             }
-            if (!UserPassMap.containsKey(fullName)){
+            if (!UserPassMap.containsKey(username)){
                 System.out.println("Enter a password (contains just numbers)");
-                int password = scanner.nextInt();
-                scanner.nextLine();
-                UserPassMap.put(fullName,password);
+                password = scanner.nextLine();
+                UserPassMap.put(username, String.valueOf(password));
 
                 System.out.println("Enter a biography you want to show others who see your page.");
                 String setBio = scanner.nextLine();
 
-                Person newPerson = new Person(fullName,setBio);
+                Person newPerson = new Person(username,setBio);
                 allPeople.add(newPerson);
                 System.out.println("you signedUp successfully.now you can login.");
-                loginPerson();
+                mainMenu();
                 break;
             }
             else{
