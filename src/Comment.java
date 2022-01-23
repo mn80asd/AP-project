@@ -3,12 +3,13 @@ import java.util.ArrayList;
 public class Comment {
 
     public int likes_num;
-    public String username;
+    public Person sender;
     public String com_text;
     public ArrayList<Comment> reply_comments;
 
-    public Comment(String username,String com_text){
-        setUsername(username);
+
+    public Comment(Person sender,String com_text){
+        setSender(sender);
         setCom_text(com_text);
         int initial_like_num = 0;
         setLikes_num(initial_like_num);
@@ -24,15 +25,13 @@ public class Comment {
         this.com_text = com_text;
     }
 
-
-    public String getUsername() {
-        return username;
+    public Person getSender() {
+        return sender;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setSender(Person sender) {
+        this.sender = sender;
     }
-
 
     public ArrayList<Comment> getReply_comments() {
         return reply_comments;
