@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 
-public class person {
+public class Person {
     public String name;
     public String bio;
     private ArrayList <Post> peronPosts = new ArrayList<>();
-    private ArrayList <person> followers = new ArrayList<>();
-    private ArrayList <person> followings = new ArrayList<>();
+    private ArrayList <Person> followers = new ArrayList<>();
+    private ArrayList <Person> followings = new ArrayList<>();
     private ArrayList <chat> allPersonChats = new ArrayList<>();
-    private ArrayList <person> blockedUsers = new ArrayList<>();
+    private ArrayList <Person> blockedUsers = new ArrayList<>();
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<person> getBlockedUsers() {
+    public ArrayList<Person> getBlockedUsers() {
         return blockedUsers;
     }
 
@@ -21,7 +21,7 @@ public class person {
         return peronPosts;
     }
 
-    public person(String name, String bio) {
+    public Person(String name, String bio) {
         this.name = name;
         this.bio = bio;
     }
@@ -39,31 +39,31 @@ public class person {
         return null;
     }
 
-    public boolean addPersonToBlockList(person personToBlock){
+    public boolean addPersonToBlockList(Person personToBlock){
         this.blockedUsers.add(personToBlock);
         return true;
     }
-    public boolean removePersonFromBlockList(person personToUnBlock){
+    public boolean removePersonFromBlockList(Person personToUnBlock){
         this.blockedUsers.remove(personToUnBlock);
         return true;
     }
-    public ArrayList<person> getFollowings() {
+    public ArrayList<Person> getFollowings() {
         return followings;
     }
 
-    public boolean addPersonToFollowings(person personToAddToFollowings){
+    public boolean addPersonToFollowings(Person personToAddToFollowings){
         this.followings.add(personToAddToFollowings);
         return true;
     }
-    public boolean addPersonToFollowers(person personToAddToFollowers){
+    public boolean addPersonToFollowers(Person personToAddToFollowers){
         this.followers.add(personToAddToFollowers);
         return true;
     }
-    public boolean removePersonFromFollowers(person personToRemoveFromFollowers){
+    public boolean removePersonFromFollowers(Person personToRemoveFromFollowers){
         this.followers.remove(personToRemoveFromFollowers);
         return true;
     }
-    public boolean removePersonFromFollowings(person personToRemoveFromFollowings){
+    public boolean removePersonFromFollowings(Person personToRemoveFromFollowings){
         this.followings.remove(personToRemoveFromFollowings);
         return true;
     }

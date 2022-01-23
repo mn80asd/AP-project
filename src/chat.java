@@ -4,9 +4,9 @@ public  class chat {
 
     private int id;
     private ArrayList <String> chatMessages =new ArrayList<>();
-    private person reciever;
+    private Person reciever;
 
-    public chat(person reciever) {
+    public chat(Person reciever) {
         this.reciever = reciever;
     }
 
