@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Comment {
 
     public int likes_num;
-    private String username;
+    public String username;
     public String com_text;
     public ArrayList<Comment> reply_comments;
 
