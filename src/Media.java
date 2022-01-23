@@ -11,6 +11,7 @@ public class Media {
     public ArrayList<Post> all_posts = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
     public static int help_id_chat = 1;
+    private boolean the_app_is_running = true;
 
     public static void main(String[] args) throws Exception {
         Media my_insta = new Media();
@@ -18,7 +19,7 @@ public class Media {
     }
 
     private void start_person() throws Exception{
-        while (true){
+        while (the_app_is_running){
             System.out.println();
             System.out.println("\tWelcome to PARADOX media! ❤️️\uD83C\uDF89");
             System.out.println("\tHope you have a good time here. \uD83E\uDDAD✨");
@@ -44,6 +45,7 @@ public class Media {
                     break;
                 case 3:
                     System.out.println("\t\t☹️ BYE BYE ☹️");
+                    the_app_is_running = false;
                     break;
                 default:
                     System.out.println("\tThere is not any option for your input. ⛔");
@@ -190,6 +192,7 @@ public class Media {
     private void search_for_person_page()throws Exception{
         while (true){
             System.out.print("\tEnter username of your goal Person(or enter 'cancel' to stop searching): ");
+            scanner.nextLine();
             String name_to_search = scanner.nextLine();
             if (name_to_search.equals("cancel")){
                 home_page();
