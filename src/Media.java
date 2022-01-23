@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class main {
+public class Media {
     HashMap<String,Integer> UserPassMap = new HashMap<>();
     HashMap<String,Integer> NamePassGroupMap = new HashMap<>();
     static Person currentUser;
@@ -11,7 +12,7 @@ public class main {
     public static int helpId = 0;
 
     public static void main(String[] args) {
-        main myInsta = new main();
+        Media myInsta = new Media();
         myInsta.beginPerson();
     }
     private void beginPerson(){
@@ -286,13 +287,14 @@ public class main {
         p.addLikeToPost();
         homePage();
     }
+
     private void commentOnAPost(){
         Scanner myscanner = new Scanner(System.in);
         System.out.println("Enter the id of the post you want to leave comment on.");
         int idToComment = myscanner.nextInt();
         myscanner.nextLine();
         for (Post p:allPosts) {
-            if(getPostById(idToComment).equals(p)){
+            if(Objects.equals(getPostById(idToComment), p)){
                 System.out.println("Enter the text of your comment.");
                 String commentBody = myscanner.nextLine();
                 p.addCommentToPost(p,commentBody,currentUser.getName());
@@ -303,6 +305,7 @@ public class main {
         homePage();
 
     }
+
     private Post getPostById(int id){
         for (Post p:allPosts) {
             if(id == p.getPostId()){
