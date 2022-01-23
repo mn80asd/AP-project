@@ -8,7 +8,7 @@ public class Post {
     private final String description;
     private int likes_num;
     public ArrayList <Comment> post_comments = new ArrayList<>();
-    private int postId;
+    private final int postId;
 
     public Post(String name, String description, TypeOfMedia media_type) {
         this.name = name;
@@ -18,13 +18,14 @@ public class Post {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
     public void addLikeToPost(){
         likes_num+=1;
     }

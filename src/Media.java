@@ -267,6 +267,12 @@ public class Media {
         }
         home_page();
     }
+//////// to complete
+    private void search_for_post(){
+        System.out.println("Enter the name of the post you want to see.");
+        String name_of_post_to_search = scanner.nextLine();
+
+    }
 
     private boolean is_followed(Person person_to_find){
         for (Person person_to_search_in_current_user_followings:current_user.getFollowings())
@@ -507,7 +513,7 @@ public class Media {
         person.showAllUserChats();
     }
 
-    private void write_message_in_chat(Chat sender_chat, Person reciever, Chat reciever_chat)throws Exception{
+    private void write_message_in_chat(Chat sender_chat, Person reciever, Chat receiver_chat)throws Exception{
         System.out.println("\tWrite the text you want to send.(you can stop chatting by entering 'end'): ");
         while (true){
             String chat_text = scanner.nextLine();
@@ -518,7 +524,7 @@ public class Media {
                 break;
             }
             sender_chat.add_message_to_chat("     "+current_user.getName()+" :   " + chat_text);
-            reciever_chat.add_message_to_chat("     "+current_user.getName()+" :   "  + chat_text);
+            receiver_chat.add_message_to_chat("     "+current_user.getName()+" :   "  + chat_text);
             System.out.println("sent");
 
         }

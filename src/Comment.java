@@ -14,4 +14,7 @@ public class Comment {
         this.likes_num = 0;
     }
 
+    public void addLikeToComment(){
+        likes_num+=1;
+    }
 }
