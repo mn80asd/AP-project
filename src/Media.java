@@ -164,7 +164,10 @@ public class Media {
             }
         }
     }
-    private void showLastPosts(){
+    private void showLastPosts()throws Exception{
+        if (currentUser.getFollowings().isEmpty()){
+            return;
+        }
         for (Person p:currentUser.getFollowings()) {
             System.out.println(p.getPeronPosts().get(p.getPeronPosts().size()-1));
         }
@@ -231,7 +234,7 @@ public class Media {
         }
         homePage();
     }
-    private boolean isFollowed(Person personToFind){
+    private boolean isFollowed(Person personToFind)throws Exception{
         for (Person personToSearchInCurrentUserFollowings:currentUser.getFollowings()) {
             if(personToFind.equals(personToSearchInCurrentUserFollowings)){
                 return true;
