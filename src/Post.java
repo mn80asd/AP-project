@@ -7,7 +7,7 @@ public class Post {
     private final String name;
     private final String description;
     private int likes_num;
-    public HashMap<String,String> comments = new HashMap<>();
+    public ArrayList <Comment> post_comments = new ArrayList<>();
     private int postId;
 
     public Post(String name, String description, TypeOfMedia media_type) {
@@ -28,8 +28,9 @@ public class Post {
     public void addLikeToPost(){
         likes_num+=1;
     }
-    public void addCommentToPost(Post p, String body,String personName){
-        comments.put(personName,body);
+    public void addCommentToPost( String body,Person comment_sender){
+        Comment new_comment = new Comment(comment_sender,body);
+        post_comments.add(new_comment);
     }
     @Override
     public String toString() {
@@ -39,7 +40,7 @@ public class Post {
                 "\n         type= " + type +
                 "\n             description= " + description +
                 "\n                 like number= "+ likes_num +
-                "\n                     comments= "+ comments+
+                "\n                     comments= "+ post_comments+
                 ' ';
     }
 }

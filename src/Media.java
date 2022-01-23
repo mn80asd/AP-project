@@ -329,14 +329,14 @@ public class Media {
     }
 
     private void comment_on_a_post()throws Exception{
-        System.out.print("\tEnter id number of the post you want to leave comment on: ");
+        System.out.print("\tEnter id of the post you want to leave comment on: ");
         int id_to_comment = scanner.nextInt();
         scanner.nextLine();
         for (Post p:all_posts)
             if(Objects.equals(get_post_by_id(id_to_comment), p)){
                 System.out.print("\tEnter the text of your comment: ");
                 String comment_text = scanner.nextLine();
-                p.addCommentToPost(p,comment_text,current_user.getName());
+                p.addCommentToPost(comment_text,current_user);
                 System.out.println("\tYour comment successfully added. ✅");
                 break;
             }
