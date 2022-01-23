@@ -137,7 +137,7 @@ public class Media {
                     break;
                 case 4:
                     beginPerson();
-                    break;
+                    return;
                 default:
                     System.out.println("\tThere is not any option for your input. ⛔");
                     break;
@@ -270,7 +270,7 @@ public class Media {
             System.out.println(currentUser.getFollowings());
         }
         else {
-            System.out.println("something is wrong. Person is not added to your followings.");
+            System.out.println("\tSomething went wrong. You can't add the goal user to your followings. ☹⛔️");
         }
         homePage();
     }
@@ -281,7 +281,7 @@ public class Media {
             homePage();
         }
         else{
-            System.out.println("something is wrong. Person is not removed from your followings.");
+            System.out.println("\tSomething went wrong. You can't remove the goal person from your followings. ☹⛔");
         }
         homePage();
     }
@@ -290,24 +290,24 @@ public class Media {
             unfollowPerson(personToBlock);
         }
         if (currentUser.addPersonToBlockList(personToBlock)){
-            System.out.println("This Person blocked successfully.");
+            System.out.println("\tThis Person blocked successfully. ✅");
         }
         else{
-            System.out.println("something is wrong. Person is not blocked.");
+            System.out.println("\tSomething went wrong. You can't block the goal person. ☹⛔");
         }
         homePage();
     }
     private void unBlockPerson(Person personToUnBlock)throws Exception{
         if(currentUser.removePersonFromBlockList(personToUnBlock)){
-            System.out.println("The Person un blocked successfully.");
+            System.out.println("\tThe Person unblocked successfully. ✅");
             homePage();
         }
         else {
-            System.out.println("something went wrong. Person is still in block list.");
+            System.out.println("\tSomething went wrong. Person is still on your block list. ☹⛔");
         }
     }
     private void likeAPost()throws Exception{
-        System.out.println("Enter the id of the post you want to like.");
+        System.out.print("\tEnter id number of the post you want to like: ");
         int idToLike = scanner.nextInt();
         Post p = getPostById(idToLike);
         if (p != null) {
@@ -317,15 +317,15 @@ public class Media {
     }
 
     private void commentOnAPost()throws Exception{
-        System.out.println("Enter the id of the post you want to leave comment on.");
+        System.out.print("\tEnter id number of the post you want to leave comment on: ");
         int idToComment = scanner.nextInt();
         scanner.nextLine();
         for (Post p:allPosts) {
             if(Objects.equals(getPostById(idToComment), p)){
-                System.out.println("Enter the text of your comment.");
+                System.out.print("\tEnter the text of your comment: ");
                 String commentBody = scanner.nextLine();
                 p.addCommentToPost(p,commentBody,currentUser.getName());
-                System.out.println("comment successfully added.");
+                System.out.println("\tYour comment successfully added. ✅");
                 break;
             }
         }
@@ -344,34 +344,37 @@ public class Media {
     private void userPage()throws Exception{
         showUserPostsInUserPage(currentUser);
         while (true){
-            System.out.println("1- Creat new post\n" +
-                    "0- back\n" );
+            System.out.println("\t\t1- Create new post");
+            System.out.println("\t\t2- Back" );
             int userPageInt = scanner.nextInt();
-            if(userPageInt == 0){
+            if(userPageInt == 2){
                 mainMenu();
                 break;
             }
             else if(userPageInt == 1){
-                creatNewPost();
+                create_new_post();
                 showUserPostsInUserPage(currentUser);
                 break;
             }
         }
     }
-    private void creatNewPost()throws Exception{
-        TypeOfMedia typeOfMedia;
+    private void create_new_post()throws Exception{
         while (true){
             scanner.nextLine();
-            System.out.println("Enter the name of the post you want to creat. enter <back> to back.");
+            System.out.print("\tEnter data of the post you want to create.(enter <back> to back): ");
             String newPostName = scanner.nextLine();
             if(newPostName.equals("back")){
                 userPage();
                 break;
             }
-            System.out.println("enter the type of media you want to post.\n1- image  2- gif  3- video");
+            System.out.println("\tEnter the type of media you want to post.");
+            System.out.println("\t\t1- Image");
+            System.out.println("\t\t2- Gif");
+            System.out.println("\t\t3- Video");
             int typeOfMediaInt = scanner.nextInt();
             scanner.nextLine();
 
+            TypeOfMedia typeOfMedia;
             if(typeOfMediaInt == 1){
                 typeOfMedia = TypeOfMedia.IMAGE;
             }
@@ -382,10 +385,11 @@ public class Media {
                 typeOfMedia = TypeOfMedia.VIDEO;
             }
             else {
-                System.out.println("you should enter a number from 1 to 3. please try again.");
+                System.out.println("\tThere is not any option for your input. ⛔");
+                System.out.println("\tTry again.");
                 continue;
             }
-            System.out.println("Enter the description of the post that you want to creat.");
+            System.out.print("\tEnter a caption for the post that you want to publish.☺️: ");
             String newPostDescription = scanner.nextLine();
             System.out.println(newPostName);
             Post newPost = new Post(newPostName,newPostDescription, typeOfMedia);
