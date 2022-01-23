@@ -28,9 +28,9 @@ public  class Chat {
 
     @Override
     public String toString() {
-        return "Chat {" +
-                "Chat id= "+ id +
-                ", Chat messages= " + chatMessages +
-                '}';
+        return "Chat :" +
+                "\n     id= "+ id +
+                "\n         Chat messages= " + chatMessages +
+                ' ';
     }
 }
