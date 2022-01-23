@@ -86,8 +86,8 @@ public class Person {
     @Override
     public String toString() {
         return "Person: " +
-                "\n     name=" + name +
-                "\n         bio=" + bio +
+                "\n     name=  " + name +
+                "\n         bio=  " + bio +
                 ' ';
     }
 }

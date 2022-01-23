@@ -10,7 +10,7 @@ public class Media {
     public ArrayList<Person> all_people = new ArrayList<>();
     public ArrayList<Post> all_posts = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
-    public static int help_id_
+    public static int help_id_chat = 1;
 
     public static void main(String[] args) throws Exception {
         Media my_insta = new Media();
@@ -27,7 +27,6 @@ public class Media {
             System.out.println("\t\t2.Sign up");
             System.out.println("\t\t3.Exit");
             int login_or_signup = scanner.nextInt();
-            scanner.nextLine();
             switch (login_or_signup){
                 case 1:
                     if (all_people.isEmpty()){
@@ -457,10 +456,11 @@ public class Media {
                     for (Person reciever: all_people) {
                         if (reciever.name.equals(person_name_start_chat)){
                             System.out.println(reciever);
-                            Chat new_chat_sender = new Chat(reciever);
+                            Chat new_chat_sender = new Chat(reciever,help_id_chat);
                             current_user.all_person_chats.add(new_chat_sender);
-                            Chat new_chat_reciever = new Chat(current_user);
+                            Chat new_chat_reciever = new Chat(current_user,help_id_chat);
                             reciever.all_person_chats.add(new_chat_reciever);
+                            help_id_chat++;
                             show_chat_text(new_chat_sender);
                             write_message_in_chat(new_chat_sender,reciever,new_chat_reciever);
                         }
@@ -481,11 +481,14 @@ public class Media {
         show_all_users_chat_list(current_user);
         System.out.print("\tEnter the id number of the Chat that you want (back==0): ");
         int id_chat_int = scanner.nextInt();
+        scanner.nextLine();
         if (id_chat_int == 0)
             chat_page();
         else {
-            Chat selected_chat = current_user.getChatById(id_chat_int);
-            System.out.println(selected_chat);
+            Chat selected_sender_chat = current_user.getChatById(id_chat_int);
+            Chat selected_reciever_chat = selected_sender_chat.getReceiver().getChatById(id_chat_int);
+            System.out.println(selected_sender_chat);
+            write_message_in_chat(selected_sender_chat,selected_sender_chat.getReceiver(),selected_reciever_chat);
         }
     }
 
@@ -503,8 +506,8 @@ public class Media {
                 chat_page();
                 break;
             }
-            sender_chat.add_message_to_chat(current_user.getName()+" :      " + chat_text);
-            reciever_chat.add_message_to_chat(current_user.getName()+" :       "  + chat_text);
+            sender_chat.add_message_to_chat("     "+current_user.getName()+" :   " + chat_text);
+            reciever_chat.add_message_to_chat("     "+current_user.getName()+" :   "  + chat_text);
             System.out.println("sent");
 
         }
