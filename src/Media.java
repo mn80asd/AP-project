@@ -430,6 +430,7 @@ public class Media {
     private void start_chat_with_a_person()throws Exception{
         while (true){
             System.out.print("\tEnter username of who you want to start Chat with.(Enter <back> to back.): ");
+            scanner.nextLine();
             String person_name_start_chat = scanner.nextLine();
             if(person_name_start_chat.equals("back")){
                 chat_page();
@@ -456,7 +457,7 @@ public class Media {
     }
 
     private void show_chat_text(Chat chat){
-        chat.showThisChat();
+        chat.show_this_chat();
     }
 
     private void select_chat()throws Exception{
@@ -483,7 +484,7 @@ public class Media {
                 chat_page();
                 break;
             }
-            chat.addMessageToChat(chat_text);
+            chat.add_message_to_chat(chat_text);
             show_chat_text(chat);
         }
     }
