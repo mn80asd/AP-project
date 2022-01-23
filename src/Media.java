@@ -85,7 +85,7 @@ public class Media {
         String password;
         while (true){
             System.out.println("Enter your username.\nEnter <back> to back.");
-            String temp = scanner.nextLine();
+            String temp0 = scanner.nextLine();
             username = scanner.nextLine();
             if (username.equals("back")){
                 beginPerson();
@@ -93,7 +93,6 @@ public class Media {
             }
             if (!UserPassMap.containsKey(username)){
                 System.out.println("Enter a password (contains just numbers)");
-                scanner.nextLine();
                 password = scanner.nextLine();
                 UserPassMap.put(username, String.valueOf(password));
 
@@ -103,7 +102,7 @@ public class Media {
                 Person newPerson = new Person(username,setBio);
                 allPeople.add(newPerson);
                 System.out.println("you signedUp successfully.now you can login.");
-                loginPerson();
+                mainMenu();
                 break;
             }
             else{
