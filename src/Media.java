@@ -109,7 +109,7 @@ public class Media {
                 break;
             }
             else{
-                System.out.println("This name is taken before. choose another name.");
+                System.out.println("\tThis username is taken before, try something else. ⛔");
             }
         }
     }
@@ -121,7 +121,7 @@ public class Media {
                     "3- My chats\n");
             int menoInt = scanner.nextInt();
             if (menoInt == 0){
-                loginPerson();
+                beginPerson();
                 break;
             }
             else if (menoInt == 1){
