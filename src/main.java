@@ -30,7 +30,6 @@ public class main {
             }
             else {
                 System.out.println("you should enter a number from 1 to 2");
-                continue;
             }
         }
     }
@@ -59,12 +58,10 @@ public class main {
                 }
                 else {
                     System.out.println("this password is incorrect. try again.");
-                    continue;
                 }
             }
             else {
                 System.out.println("this UserName is incorrect. try again.");
-                continue;
             }
         }
     }
@@ -94,7 +91,6 @@ public class main {
             }
             else{
                 System.out.println("This name is taken before. choose another name.");
-                continue;
             }
         }
     }
@@ -124,7 +120,6 @@ public class main {
             }
             else{
                 System.out.println("You should choose a number from 0 to 3");
-                continue;
             }
         }
     }
