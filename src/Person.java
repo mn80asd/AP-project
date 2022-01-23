@@ -27,7 +27,7 @@ public class Person {
     }
     public void showAllUserChats(){
         for (Chat c: all_person_chats) {
-            System.out.println(c);
+            System.out.println("        "+c.getId()+ "-    "+c.getReceiver().name);
         }
     }
 

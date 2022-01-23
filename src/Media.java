@@ -23,9 +23,11 @@ public class Media {
             System.out.println("\tWelcome to PARADOX media! ❤️️\uD83C\uDF89");
             System.out.println("\tHope you have a good time here. \uD83E\uDDAD✨");
             System.out.println();
+            System.out.println("----------------------------------------");
             System.out.println("\t\t1.Login");
             System.out.println("\t\t2.Sign up");
             System.out.println("\t\t3.Exit");
+            System.out.println("----------------------------------------");
             int login_or_signup = scanner.nextInt();
             switch (login_or_signup){
                 case 1:
@@ -53,6 +55,7 @@ public class Media {
 
     private void login_person()throws Exception{
         while (true) {
+            scanner.nextLine();
             System.out.print("\tEnter your username(Enter 'cancel' if you are regretful): ");
             String username = scanner.nextLine();
             if(username.equals("cancel")){
@@ -116,11 +119,13 @@ public class Media {
 
     private void main_menu()throws Exception{
         while (true){
+            System.out.println("----------------------------------------");
             System.out.println("\tEnter the number of your chosen task.");
             System.out.println("\t\t1- Home Page \uD83C\uDFE0");
             System.out.println("\t\t2- User Page \uD83D\uDE4B\u200D");
             System.out.println("\t\t3- Message Page \uD83D\uDC8C");
             System.out.println("\t\t4- Log out \uD83D\uDC4B");
+            System.out.println("----------------------------------------");
 
             int menu_chosen_task = scanner.nextInt();
             switch (menu_chosen_task){
@@ -415,12 +420,14 @@ public class Media {
     }
 
     private void chat_page()throws Exception{
-        show_all_users_chat_list(current_user);
+
         while(true){
+            System.out.println("----------------------------------------");
             System.out.println("\tEnter the number of your chosen task.");
             System.out.println("\t\t1- Start chat with a person");
             System.out.println("\t\t2- Select a chat");
             System.out.println("\t\t3- Back");
+            System.out.println("----------------------------------------");
 
             int user_chats_int = scanner.nextInt();
             switch (user_chats_int){
