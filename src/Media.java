@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
-import java.util.*;
 
 public class Media {
     HashMap<String,Integer> UserPassMap = new HashMap<>();
@@ -168,7 +167,7 @@ public class Media {
                     for (Person p: allPeople) {
                         if (p.name.equals(nameToSearch)){
                             System.out.println(p);
-                            if(this.isFollowed(p) & !this.isBlocked(p)){
+                            if(this.isFollowed(p) & this.isBlocked(p)){
                                 System.out.println("----------you already followed this user.----------");
                                 System.out.println("1- unfollow  2- block\n");
                                 int wantToUnfollowOrBlock = scanner.nextInt();
@@ -182,7 +181,7 @@ public class Media {
                                 }
                                 break;
                             }
-                            else if(!this.isFollowed(p) & !this.isBlocked(p)){
+                            else if(!this.isFollowed(p) & this.isBlocked(p)){
                                 System.out.println("1- follow  2- block\n");
                                 int wantToFollowOrBlock = scanner.nextInt();
                                 if(wantToFollowOrBlock == 1){
@@ -227,10 +226,10 @@ public class Media {
     private boolean isBlocked(Person personToFind){
         for (Person personToSearchInCurrentUserBlockedList:currentUser.getBlockedUsers()) {
             if(personToFind.equals(personToSearchInCurrentUserBlockedList)){
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
     private void followPerson(Person personToFollow){
         if(currentUser.addPersonToFollowings(personToFollow) & personToFollow.addPersonToFollowers(currentUser)){
