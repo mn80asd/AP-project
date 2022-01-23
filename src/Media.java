@@ -10,6 +10,7 @@ public class Media {
     public ArrayList<Person> all_people = new ArrayList<>();
     public ArrayList<Post> all_posts = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
+    public static int help_id_
 
     public static void main(String[] args) throws Exception {
         Media my_insta = new Media();
@@ -26,6 +27,7 @@ public class Media {
             System.out.println("\t\t2.Sign up");
             System.out.println("\t\t3.Exit");
             int login_or_signup = scanner.nextInt();
+            scanner.nextLine();
             switch (login_or_signup){
                 case 1:
                     if (all_people.isEmpty()){
@@ -367,7 +369,7 @@ public class Media {
     private void create_new_post()throws Exception{
         while (true){
             scanner.nextLine();
-            System.out.print("\tEnter data of the post you want to create.(enter <back> to back): ");
+            System.out.print("\tEnter name of the post you want to create.(enter <back> to back): ");
             String new_post_name = scanner.nextLine();
             if(new_post_name.equals("back")){
                 user_page();
@@ -452,12 +454,15 @@ public class Media {
             else {
                 if(user_pass_map.containsKey(person_name_start_chat)){
                     System.out.println("\tUser found. ✅");
-                    for (Person p: all_people) {
-                        if (p.name.equals(person_name_start_chat)){
-                            System.out.println(p);
-                            Chat new_chat = new Chat(p);
-                            show_chat_text(new_chat);
-                            write_message_in_chat(new_chat);
+                    for (Person reciever: all_people) {
+                        if (reciever.name.equals(person_name_start_chat)){
+                            System.out.println(reciever);
+                            Chat new_chat_sender = new Chat(reciever);
+                            current_user.all_person_chats.add(new_chat_sender);
+                            Chat new_chat_reciever = new Chat(current_user);
+                            reciever.all_person_chats.add(new_chat_reciever);
+                            show_chat_text(new_chat_sender);
+                            write_message_in_chat(new_chat_sender,reciever,new_chat_reciever);
                         }
                     }
                     break;
@@ -488,16 +493,20 @@ public class Media {
         person.showAllUserChats();
     }
 
-    private void write_message_in_chat(Chat chat)throws Exception{
+    private void write_message_in_chat(Chat sender_chat, Person reciever, Chat reciever_chat)throws Exception{
         System.out.println("\tWrite the text you want to send.(you can stop chatting by entering 'end'): ");
         while (true){
             String chat_text = scanner.nextLine();
             if(chat_text.equals("end")){
+                show_chat_text(sender_chat);
+                System.out.println("-------------------chat ended-----------------");
                 chat_page();
                 break;
             }
-            chat.add_message_to_chat(chat_text);
-            show_chat_text(chat);
+            sender_chat.add_message_to_chat(current_user.getName()+" :      " + chat_text);
+            reciever_chat.add_message_to_chat(current_user.getName()+" :       "  + chat_text);
+            System.out.println("sent");
+
         }
     }
 
