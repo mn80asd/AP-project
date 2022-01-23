@@ -278,7 +278,9 @@ public class Media {
         System.out.println("Enter the id of the post you want to like.");
         int idToLike = scanner.nextInt();
         Post p = getPostById(idToLike);
-        p.addLikeToPost();
+        if (p != null) {
+            p.addLikeToPost();
+        }
         homePage();
     }
 
