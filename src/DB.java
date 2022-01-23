@@ -23,7 +23,7 @@ public class DB {
             System.out.println("Function Complete.");
         };
     }
-    public static Connection getConnection() throws Exception{}
+    public static Connection getConnection() throws Exception{
         try{
             String driver ="com.mysql.jdbc.Driver";
             String url = "jdbc:mysql://24.196.52.166:3306/testab";
