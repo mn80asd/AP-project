@@ -40,6 +40,9 @@ public class Media {
                 case 2:
                     signUpPerson();
                     break;
+                case 3:
+                    System.out.println("\t\t☹️ BYE BYE ☹️");
+                    break;
                 default:
                     System.out.println("\tThere is not any option for your input. ⛔");
                     beginPerson();
@@ -59,7 +62,7 @@ public class Media {
                 System.out.print("\tEnter your password: ");
                 String password = scanner.nextLine();
                 if(Objects.equals(password, UserPassMap.get(username))){
-                    System.out.println("\tYou logged in successfully.");
+                    System.out.println("\tYou logged in successfully. ✅");
                     for (Person p:allPeople) {
                         if(p.name.equals(username)){
                             currentUser = p;
@@ -98,7 +101,7 @@ public class Media {
 
                 Person newPerson = new Person(username,setBio);
                 allPeople.add(newPerson);
-                System.out.println("you signedUp successfully.now you can login.");
+                System.out.println("\tYou signed up successfully. ✅");
                 for (Person p:allPeople) {
                     if(p.name.equals(username)){
                         currentUser = p;
@@ -115,57 +118,60 @@ public class Media {
     }
     private void mainMenu()throws Exception{
         while (true){
-            System.out.println("Enter the number of what you want. enter 0 to back.\n" +
-                    "1- Home page\n" +
-                    "2- My page\n" +
-                    "3- My chats\n");
-            int menoInt = scanner.nextInt();
-            if (menoInt == 0){
-                beginPerson();
-                break;
-            }
-            else if (menoInt == 1){
-                homePage();
-                break;
-            }
-            else if (menoInt == 2){
-                userPage();
-                break;
-            }
-            else if (menoInt == 3){
-                userChatsPage();
-                break;
-            }
-            else{
-                System.out.println("You should choose a number from 0 to 3");
+            System.out.println("\tEnter the number of your chosen task.");
+            System.out.println("\t\t1- Home Page \uD83C\uDFE0");
+            System.out.println("\t\t2- User Page \uD83D\uDE4B\u200D");
+            System.out.println("\t\t3- Message Page \uD83D\uDC8C");
+            System.out.println("\t\t4- Log out \uD83D\uDC4B");
+
+            int menu_chosen_task = scanner.nextInt();
+            switch (menu_chosen_task){
+                case 1:
+                    homePage();
+                    break;
+                case 2:
+                    userPage();
+                    break;
+                case 3:
+                    userChatsPage();
+                    break;
+                case 4:
+                    beginPerson();
+                    break;
+                default:
+                    System.out.println("\tThere is not any option for your input. ⛔");
+                    break;
             }
         }
     }
     private void homePage()throws Exception{
         while (true){
-            System.out.println("1- Search for a Person page\n" +
-                    "2- Like a post\n" +
-                    "3- Comment on a post\n" +
-                    "0- back");
+            System.out.println("\tEnter the number of your chosen task.");
+            System.out.println("\t\t1- Search for a Person page \uD83D\uDD0E");
+            System.out.println("\t\t2- Like a post ❤");
+            System.out.println("\t\t3- Comment on a post ☁️");
+            System.out.println("\t\t4- Back");
+
             if (!currentUser.getFollowings().isEmpty()) {
                 showLastPosts();
             }
             int homePageInt = scanner.nextInt();
-            if (homePageInt == 0) {
-                mainMenu();
-                break;
-            }
-            else if (homePageInt == 1){
-                searchForAPersonPage();
-                break;
-            }
-            else if (homePageInt == 2){
-                likeAPost();
-                break;
-            }
-            else if (homePageInt == 3){
-                commentOnAPost();
-                break;
+            switch (homePageInt){
+                case 1:
+                    searchForAPersonPage();
+                    break;
+                case 2:
+                    likeAPost();
+                    break;
+                case 3:
+                    commentOnAPost();
+                    break;
+                case 4:
+                    mainMenu();
+                    break;
+                default:
+                    System.out.println("\tThere is not any option for your input. ⛔");
+                    return;
             }
         }
     }
@@ -179,21 +185,22 @@ public class Media {
     }
     private void searchForAPersonPage()throws Exception{
         while (true){
-            System.out.println("Enter the name of the Person you want.\n Enter <back> to back.");
+            System.out.print("\tEnter username of your goal Person(or enter 'cancel' to stop searching): ");
             String nameToSearch = scanner.nextLine();
-            if (nameToSearch.equals("back")){
+            if (nameToSearch.equals("cancel")){
                 homePage();
                 break;
             }
             else {
                 if(UserPassMap.containsKey(nameToSearch)){
-                    System.out.println("user found.");
+                    System.out.println("\tUser found. ✅");
                     for (Person p: allPeople) {
                         if (p.name.equals(nameToSearch)){
                             System.out.println(p);
                             if(this.isFollowed(p) & this.isBlocked(p)){
-                                System.out.println("----------you already followed this user.----------");
-                                System.out.println("1- unfollow  2- block\n");
+                                System.out.println("\tYou have already followed this user. \uD83E\uDD28");
+                                System.out.println("\t\t1- Unfollow");
+                                System.out.println("\t\t2- Block");
                                 int wantToUnfollowOrBlock = scanner.nextInt();
                                 if (wantToUnfollowOrBlock == 1){
                                     unfollowPerson(p);
@@ -206,7 +213,8 @@ public class Media {
                                 break;
                             }
                             else if(!this.isFollowed(p) & this.isBlocked(p)){
-                                System.out.println("1- follow  2- block\n");
+                                System.out.println("\t\t1- Follow");
+                                System.out.println("\t\t2- Block");
                                 int wantToFollowOrBlock = scanner.nextInt();
                                 if(wantToFollowOrBlock == 1){
                                     followPerson(p);
@@ -218,9 +226,10 @@ public class Media {
                                 break;
                             }
                             else {
-                                System.out.println("-------------This user is already blocked------------");
-                                System.out.println("Do you want to unblock this user?" +
-                                        "1- yes     2- no");
+                                System.out.println("\tYou have already followed this user. \uD83E\uDD28");
+                                System.out.println("\tDo you want to unblock this user? \uD83D\uDE42");
+                                System.out.println("\t\t1- Yes");
+                                System.out.println("\t\t2- No");
                                 int toBlock = scanner.nextInt();
                                 if(toBlock == 1){
                                     unBlockPerson(p);
@@ -233,13 +242,13 @@ public class Media {
                     break;
                 }
                 else {
-                    System.out.println("this name doesn't exist. try again.");
+                    System.out.println("\tThis username doesn't exist! Try Again. ⛔");
                 }
             }
         }
         homePage();
     }
-    private boolean isFollowed(Person personToFind)throws Exception{
+    private boolean isFollowed(Person personToFind){
         for (Person personToSearchInCurrentUserFollowings:currentUser.getFollowings()) {
             if(personToFind.equals(personToSearchInCurrentUserFollowings)){
                 return true;
@@ -257,7 +266,7 @@ public class Media {
     }
     private void followPerson(Person personToFollow)throws Exception{
         if(currentUser.addPersonToFollowings(personToFollow) & personToFollow.addPersonToFollowers(currentUser)){
-            System.out.println("This Person added to your followings successfully.");
+            System.out.println("\tThis Person added to your followings successfully. ✅");
             System.out.println(currentUser.getFollowings());
         }
         else {
@@ -267,7 +276,7 @@ public class Media {
     }
     private void unfollowPerson(Person personToUnfollow)throws Exception{
         if(currentUser.removePersonFromFollowings(personToUnfollow) & personToUnfollow.removePersonFromFollowers(currentUser)){
-            System.out.println("This Person removed from your followings successfully.");
+            System.out.println("\tThis Person removed from your followings successfully. ✅");
             System.out.println(currentUser.getFollowings());
             homePage();
         }
@@ -294,7 +303,7 @@ public class Media {
             homePage();
         }
         else {
-            System.out.println("something is wrong. Person is still in block list.");
+            System.out.println("something went wrong. Person is still in block list.");
         }
     }
     private void likeAPost()throws Exception{
@@ -352,7 +361,7 @@ public class Media {
     private void creatNewPost()throws Exception{
         TypeOfMedia typeOfMedia;
         while (true){
-
+            scanner.nextLine();
             System.out.println("Enter the name of the post you want to creat. enter <back> to back.");
             String newPostName = scanner.nextLine();
             if(newPostName.equals("back")){
@@ -378,6 +387,7 @@ public class Media {
             }
             System.out.println("Enter the description of the post that you want to creat.");
             String newPostDescription = scanner.nextLine();
+            System.out.println(newPostName);
             Post newPost = new Post(newPostName,newPostDescription, typeOfMedia);
             currentUser.addPostToUserPosts(newPost);
             allPosts.add(newPost);
@@ -414,7 +424,7 @@ public class Media {
     }
     private void startChatWithAPerson()throws Exception{
         while (true){
-            System.out.println("Enter the name of the Person you want to start Chat with. Enter <back> to back.");
+            System.out.print("\tEnter username of who you want to start Chat with.(Enter <back> to back.): ");
             String personNameStartChat = scanner.nextLine();
             if(personNameStartChat.equals("back")){
                 userChatsPage();
@@ -422,7 +432,7 @@ public class Media {
             }
             else {
                 if(UserPassMap.containsKey(personNameStartChat)){
-                    System.out.println("user found.");
+                    System.out.println("\tUser found. ✅");
                     for (Person p: allPeople) {
                         if (p.name.equals(personNameStartChat)){
                             System.out.println(p);
@@ -434,7 +444,7 @@ public class Media {
                     break;
                 }
                 else {
-                    System.out.println("this name doesn't exist. try again.");
+                    System.out.println("\tThis username doesn't exist! Try Again. ⛔");
                 }
             }
         }
@@ -446,7 +456,7 @@ public class Media {
 
     private void selectChat()throws Exception{
         showAllUserChatList(currentUser);
-        System.out.println("Enter the id of the Chat you want to see.\n0- back\n");
+        System.out.print("\tEnter the id number of the Chat that you want (back==0): ");
         int idChatInt = scanner.nextInt();
         if ( idChatInt == 0){
             userChatsPage();
@@ -461,7 +471,7 @@ public class Media {
         person.showAllUserChats();
     }
     private void writeMessageInChat(Chat chat)throws Exception{
-        System.out.println("Write the text you want to send. if you want to stop chating, enter <end>.");
+        System.out.println("\tWrite the text you want to send.(you can stop chatting by entering 'end'): ");
         while (true){
             String chatText = scanner.nextLine();
             if(chatText.equals("end")){
