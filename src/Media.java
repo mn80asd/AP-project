@@ -352,7 +352,7 @@ public class Media {
     private void creatNewPost()throws Exception{
         TypeOfMedia typeOfMedia;
         while (true){
-
+            scanner.nextLine();
             System.out.println("Enter the name of the post you want to creat. enter <back> to back.");
             String newPostName = scanner.nextLine();
             if(newPostName.equals("back")){
@@ -378,6 +378,7 @@ public class Media {
             }
             System.out.println("Enter the description of the post that you want to creat.");
             String newPostDescription = scanner.nextLine();
+            System.out.println(newPostName);
             Post newPost = new Post(newPostName,newPostDescription, typeOfMedia);
             currentUser.addPostToUserPosts(newPost);
             allPosts.add(newPost);
