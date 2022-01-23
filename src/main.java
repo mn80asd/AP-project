@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class main {
-
+    public int test = 1;
     HashMap<String,Integer> UserPassMap = new HashMap<>();
     HashMap<String,Integer> NamePassGroupMap = new HashMap<>();
     static Person currentUser;
