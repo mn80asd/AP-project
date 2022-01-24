@@ -14,7 +14,8 @@ public class Comment {
     }
 
     public void addCommentToReplies(Comment reply_comment){
-        reply_comment.addCommentToReplies(reply_comment);
+        reply_comments.add(reply_comment);
+
         System.out.println("reply sent");
     }
     public Comment(Person sender, String comment_body) {
