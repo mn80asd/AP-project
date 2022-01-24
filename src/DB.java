@@ -17,11 +17,11 @@ public class DB {
     public static ArrayList‹String> get() throws Exception{
         try {
             Connection con = getConnection();
-            PreparedStatement statement = con.prepareStatement("SELECT first,last FROM iamalive");
+            PreparedStatement statement = con.prepareStatement("SELECT first,last FROM tablename");
 
             ResultSet result = statement.executeQuery();
 
-            ArrayList‹String›array = new ArrayList‹String›();
+            ArrayList‹String› array = new ArrayList‹String›();
             while (result.next()) {
                 System.out.print(result.getString("first"));
                 System.out.print(" ");
