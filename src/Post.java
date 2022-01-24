@@ -28,9 +28,11 @@ public class Post {
 
     public void addLikeToPost(){
         likes_num+=1;
+        System.out.println("\tPost liked");
     }
     public void addCommentToPost( String body,Person comment_sender){
         Comment new_comment = new Comment(comment_sender,body);
+        Media.all_comments.add(new_comment);
         post_comments.add(new_comment);
     }
     @Override

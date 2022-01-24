@@ -12,6 +12,7 @@ public class Media {
     static Scanner scanner = new Scanner(System.in);
     public static int help_id_chat = 1;
     private boolean the_app_is_running = true;
+    public static ArrayList<Comment> all_comments = new ArrayList<>();
 
     public static void main(String[] args) throws Exception {
         Media my_insta = new Media();
@@ -157,7 +158,8 @@ public class Media {
             System.out.println("\t\t1- Search for a Person page \uD83D\uDD0E");
             System.out.println("\t\t2- Like a post ❤");
             System.out.println("\t\t3- Comment on a post ☁️");
-            System.out.println("\t\t4- Back");
+            System.out.println("\t\t4- Search for a post.");
+            System.out.println("\t\t5- Back");
 
             if (!current_user.getFollowings().isEmpty())
                 show_last_posts();
@@ -173,6 +175,9 @@ public class Media {
                     comment_on_a_post();
                     break;
                 case 4:
+                    search_for_post();
+                    break;
+                case 5:
                     main_menu();
                     break;
                 default:
@@ -268,10 +273,73 @@ public class Media {
         home_page();
     }
 //////// to complete
-    private void search_for_post(){
+    private void search_for_post() throws Exception {
         System.out.println("Enter the name of the post you want to see.");
         String name_of_post_to_search = scanner.nextLine();
+        Post searched_post = get_post_by_name(name_of_post_to_search);
+        show_post_page(searched_post);
 
+    }
+    private void show_post_page(Post post_to_show) throws Exception {
+        System.out.println(post_to_show);
+        while (true){
+            System.out.println("----------------------------------------");
+            System.out.println("\t1- like the post\n\t\t2- leave comment on post\n\t\t3- like a comment\n\t\t" +
+                    "4- reply on a comment\n\t\t5- back");
+            System.out.println("----------------------------------------");
+            int post_page_meno = scanner.nextInt();
+            if(post_page_meno == 1){
+                like_a_post();
+                break;
+            }
+            else if(post_page_meno == 2){
+                comment_on_a_post();
+                break;
+            }
+            else if(post_page_meno == 3){
+                like_a_comment();
+                break;
+            }
+            else if(post_page_meno == 4){
+                reply_on_a_comment();
+                break;
+            }
+            else if(post_page_meno == 5){
+                home_page();
+                break;
+            }
+        }
+    }
+
+    private void like_a_comment() throws Exception {
+        System.out.println("\tEnter the id of comment you want to like.");
+        int chosen_id = scanner.nextInt();
+        Comment c =get_comment_by_id(chosen_id);
+        if(c != null){
+            c.addLikeToComment();
+        }
+        home_page();
+    }
+
+    private Comment get_comment_by_id(int id){
+        for (Comment c:all_comments) {
+            if(id == c.getId()){
+                return c;
+            }
+        }
+        return null;
+    }
+    //// to complete
+    private void reply_on_a_comment(){
+
+    }
+    private Post get_post_by_name(String name){
+        for (Post p:all_posts) {
+            if(name.equals(p.getName())){
+                return p;
+            }
+        }
+        return null;
     }
 
     private boolean is_followed(Person person_to_find){
