@@ -19,7 +19,7 @@ public class Media {
         my_insta.start_person();
     }
 
-    private void start_person() throws Exception{
+    private void start_person() {
         while (the_app_is_running){
             System.out.println();
             System.out.println("\tWelcome to PARADOX media! ❤️️\uD83C\uDF89");
@@ -57,7 +57,7 @@ public class Media {
         }
     }
 
-    private void login_person()throws Exception{
+    private void login_person(){
         while (true) {
             scanner.nextLine();
             System.out.print("\tEnter your username(Enter 'cancel' if you are regretful): ");
@@ -88,7 +88,7 @@ public class Media {
         }
     }
 
-    private void signup_person()throws Exception{
+    private void signup_person(){
         while (true){
             System.out.print("\tEnter a username(Enter 'back' if you are regretful): ");
             scanner.nextLine();
@@ -121,7 +121,7 @@ public class Media {
         }
     }
 
-    private void main_menu()throws Exception{
+    private void main_menu(){
         while (true){
             System.out.println("----------------------------------------");
             System.out.println("\tEnter the number of your chosen task.");
@@ -152,14 +152,16 @@ public class Media {
         }
     }
 
-    private void home_page()throws Exception{
+    private void home_page(){
         while (true){
+            System.out.println("----------------------------------------");
             System.out.println("\tEnter the number of your chosen task.");
             System.out.println("\t\t1- Search for a Person page \uD83D\uDD0E");
             System.out.println("\t\t2- Like a post ❤");
             System.out.println("\t\t3- Comment on a post ☁️");
             System.out.println("\t\t4- Search for a post.");
             System.out.println("\t\t5- Back");
+            System.out.println("----------------------------------------");
 
             if (!current_user.getFollowings().isEmpty())
                 show_last_posts();
@@ -190,11 +192,16 @@ public class Media {
     private void show_last_posts(){
         if (current_user.getFollowings().isEmpty())
             return;
-        for (Person p:current_user.getFollowings())
-            System.out.println(p.getPeronPosts().get(p.getPeronPosts().size()-1));
+        for (Person p:current_user.getFollowings()){
+            if (p.getPeronPosts().size() >= 1)
+                System.out.println(p.getPeronPosts().get(p.getPeronPosts().size()-1));
+            else
+                System.out.println("no post");
+        }
+
     }
 
-    private void search_for_person_page()throws Exception{
+    private void search_for_person_page(){
         while (true){
             System.out.print("\tEnter username of your goal Person(or enter 'cancel' to stop searching): ");
             scanner.nextLine();
@@ -209,7 +216,7 @@ public class Media {
                     for (Person p: all_people) {
                         if (p.name.equals(name_to_search)){
                             System.out.println(p);
-                            if(this.is_followed(p) & this.is_blocked(p)){
+                            if(this.is_followed(p) && this.is_blocked(p)){
                                 System.out.println("\tYou have already followed this user. \uD83E\uDD28");
                                 System.out.println("\t\t1- Unfollow");
                                 System.out.println("\t\t2- Block");
@@ -227,7 +234,7 @@ public class Media {
                                 }
                                 break;
                             }
-                            else if(!this.is_followed(p) & this.is_blocked(p)){
+                            else if(!this.is_followed(p) && this.is_blocked(p)){
                                 System.out.println("\t\t1- Follow");
                                 System.out.println("\t\t2- Block");
                                 int wanna_follow_or_block = scanner.nextInt();
@@ -245,7 +252,7 @@ public class Media {
                                 break;
                             }
                             else {
-                                System.out.println("\tYou have already followed this user. \uD83E\uDD28");
+                                //System.out.println("\tYou have already followed this user. \uD83E\uDD28");
                                 System.out.println("\tDo you want to unblock this user? \uD83D\uDE42");
                                 System.out.println("\t\t1- Yes");
                                 System.out.println("\t\t2- No");
@@ -272,8 +279,8 @@ public class Media {
         }
         home_page();
     }
-//////// to complete
-    private void search_for_post() throws Exception {
+
+    private void search_for_post()  {
         System.out.println("Enter the name of the post you want to see.");
         scanner.nextLine();
         String name_of_post_to_search = scanner.nextLine();
@@ -288,7 +295,7 @@ public class Media {
 
     }
 
-    private void show_post_page(Post post_to_show) throws Exception {
+    private void show_post_page(Post post_to_show) {
         System.out.println(post_to_show);
         while (true){
             System.out.println("----------------------------------------");
@@ -319,7 +326,7 @@ public class Media {
         }
     }
 
-    private void like_a_comment() throws Exception {
+    private void like_a_comment() {
         System.out.println("\tEnter the id of comment you want to like.");
         int chosen_id = scanner.nextInt();
         Comment c =get_comment_by_id(chosen_id);
@@ -371,7 +378,7 @@ public class Media {
         return true;
     }
 
-    private void follow_person(Person person_to_follow)throws Exception{
+    private void follow_person(Person person_to_follow)  {
         if(current_user.addPersonToFollowings(person_to_follow) & person_to_follow.addPersonToFollowers(current_user)){
             System.out.println("\tThis Person added to your followings successfully. ✅");
             System.out.println(current_user.getFollowings());
@@ -381,7 +388,7 @@ public class Media {
         home_page();
     }
 
-    private void unfollow_person(Person person_to_unfollow)throws Exception{
+    private void unfollow_person(Person person_to_unfollow){
         if(current_user.removePersonFromFollowings(person_to_unfollow) & person_to_unfollow.removePersonFromFollowers(current_user)){
             System.out.println("\tThis Person removed from your followings successfully. ✅");
             System.out.println(current_user.getFollowings());
@@ -392,7 +399,7 @@ public class Media {
         home_page();
     }
 
-    private void block_person(Person person_to_block)throws Exception{
+    private void block_person(Person person_to_block){
         if(this.is_followed(person_to_block))
             unfollow_person(person_to_block);
         if (current_user.addPersonToBlockList(person_to_block))
@@ -402,7 +409,7 @@ public class Media {
         home_page();
     }
 
-    private void unblock_person(Person person_to_unblock)throws Exception{
+    private void unblock_person(Person person_to_unblock){
         if(current_user.removePersonFromBlockList(person_to_unblock)){
             System.out.println("\tThe Person unblocked successfully. ✅");
             home_page();
@@ -411,7 +418,7 @@ public class Media {
             System.out.println("\tSomething went wrong. Person is still on your block list. ☹⛔");
     }
 
-    private void like_a_post()throws Exception{
+    private void like_a_post(){
         System.out.print("\tEnter id number of the post you want to like: ");
         int id_to_like = scanner.nextInt();
         Post p = get_post_by_id(id_to_like);
@@ -420,7 +427,7 @@ public class Media {
         home_page();
     }
 
-    private void comment_on_a_post()throws Exception{
+    private void comment_on_a_post(){
         System.out.print("\tEnter id of the post you want to leave comment on: ");
         int id_to_comment = scanner.nextInt();
         scanner.nextLine();
@@ -442,7 +449,7 @@ public class Media {
         return null;
     }
 
-    private void user_page()throws Exception{
+    private void user_page(){
         show_user_posts_in_user_page(current_user);
         while (true){
             System.out.println("----------------------------------------");
@@ -464,7 +471,7 @@ public class Media {
         }
     }
 
-    private void create_new_post()throws Exception{
+    private void create_new_post(){
         while (true){
             scanner.nextLine();
             System.out.print("\tEnter name of the post you want to create.(enter <back> to back): ");
@@ -513,7 +520,7 @@ public class Media {
         person.showAllPostsOfUser();
     }
 
-    private void chat_page()throws Exception{
+    private void chat_page(){
 
         while(true){
             System.out.println("----------------------------------------");
@@ -542,7 +549,7 @@ public class Media {
         }
     }
 
-    private void start_chat_with_a_person()throws Exception{
+    private void start_chat_with_a_person(){
         while (true){
             System.out.print("\tEnter username of who you want to start Chat with.(Enter <back> to back.): ");
             scanner.nextLine();
@@ -578,7 +585,7 @@ public class Media {
         chat.show_this_chat();
     }
 
-    private void select_chat()throws Exception{
+    private void select_chat(){
         show_all_users_chat_list(current_user);
         System.out.print("\tEnter the id number of the Chat that you want (back==0): ");
         int id_chat_int = scanner.nextInt();
@@ -597,7 +604,7 @@ public class Media {
         person.showAllUserChats();
     }
 
-    private void write_message_in_chat(Chat sender_chat, Person reciever, Chat receiver_chat)throws Exception{
+    private void write_message_in_chat(Chat sender_chat, Person reciever, Chat receiver_chat){
         System.out.println("\tWrite the text you want to send.(you can stop chatting by entering 'end'): ");
         while (true){
             String chat_text = scanner.nextLine();
