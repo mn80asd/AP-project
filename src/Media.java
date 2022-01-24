@@ -275,16 +275,24 @@ public class Media {
 //////// to complete
     private void search_for_post() throws Exception {
         System.out.println("Enter the name of the post you want to see.");
+        scanner.nextLine();
         String name_of_post_to_search = scanner.nextLine();
         Post searched_post = get_post_by_name(name_of_post_to_search);
-        show_post_page(searched_post);
+        if(searched_post != null){
+            show_post_page(searched_post);
+        }
+        else {
+            System.out.println("not found");
+            home_page();
+        }
 
     }
+
     private void show_post_page(Post post_to_show) throws Exception {
         System.out.println(post_to_show);
         while (true){
             System.out.println("----------------------------------------");
-            System.out.println("\t1- like the post\n\t\t2- leave comment on post\n\t\t3- like a comment\n\t\t" +
+            System.out.println("\t\t1- like the post\n\t\t2- leave comment on post\n\t\t3- like a comment\n\t\t" +
                     "4- reply on a comment\n\t\t5- back");
             System.out.println("----------------------------------------");
             int post_page_meno = scanner.nextInt();
@@ -329,10 +337,17 @@ public class Media {
         }
         return null;
     }
-    //// to complete
-    private void reply_on_a_comment(){
 
+    private void reply_on_a_comment(){
+        System.out.println("Enter the id of comment you want to reply.");
+        int comment_id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the text of reply.");
+        String reply_text = scanner.nextLine();
+        Comment new_reply = new Comment(current_user,reply_text);
+        get_comment_by_id(comment_id).addCommentToReplies(new_reply);
     }
+
     private Post get_post_by_name(String name){
         for (Post p:all_posts) {
             if(name.equals(p.getName())){
@@ -430,6 +445,7 @@ public class Media {
     private void user_page()throws Exception{
         show_user_posts_in_user_page(current_user);
         while (true){
+            System.out.println("----------------------------------------");
             System.out.println("\t\t1- Create new post");
             System.out.println("\t\t2- Back" );
             int user_page_int = scanner.nextInt();
