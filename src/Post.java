@@ -2,36 +2,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Post {
-    private TypeOfMedia type;
-    private static int helpIdPost=0;
+    private final TypeOfMedia type;
+    private static int help_id_post = 0;
     private final String name;
     private final String description;
-    private int likeNumber;
-    private HashMap<String,String> comments = new HashMap<>();
-    private int postId;
+    private int likes_num;
+    public ArrayList <Comment> post_comments = new ArrayList<>();
+    private final int postId;
 
-    public Post(String name, String description, TypeOfMedia mediaType) {
+    public Post(String name, String description, TypeOfMedia media_type) {
         this.name = name;
         this.description = description;
-        this.type = mediaType;
-        this.postId= helpIdPost++;
+        this.type = media_type;
+        this.postId = help_id_post++;
 
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getPostId() {
         return postId;
     }
 
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
     public void addLikeToPost(){
-        likeNumber+=1;
+        likes_num+=1;
+        System.out.println("\tPost liked");
     }
-    public void addCommentToPost(Post p, String body,String personName){
-        comments.put(personName,body);
+    public void addCommentToPost( String body,Person comment_sender){
+        Comment new_comment = new Comment(comment_sender,body);
+        Media.all_comments.add(new_comment);
+        post_comments.add(new_comment);
     }
-
     @Override
     public String toString() {
         return "Post " +
@@ -39,8 +42,8 @@ public class Post {
                 "\n     name= " + name +
                 "\n         type= " + type +
                 "\n             description= " + description +
-                "\n                 like number= "+ likeNumber +
-                "\n                     comments= "+ comments+
+                "\n                 like number= "+ likes_num +
+                "\n                     comments= "+ post_comments+
                 ' ';
     }
 }
