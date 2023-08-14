@@ -10,7 +10,7 @@ public class Media {
     public ArrayList<Person> all_people = new ArrayList<>();
     public ArrayList<Post> all_posts = new ArrayList<>();
     static Scanner scanner = new Scanner(System.in);
-    public static int help_id_chat = 1;
+    public static int help_id_Chat = 1;
     private boolean the_app_is_running = true;
     public static ArrayList<Comment> all_comments = new ArrayList<>();
 
@@ -140,7 +140,7 @@ public class Media {
                     user_page();
                     break;
                 case 3:
-                    chat_page();
+                    Chat_page();
                     break;
                 case 4:
                     start_person();
@@ -520,23 +520,23 @@ public class Media {
         person.showAllPostsOfUser();
     }
 
-    private void chat_page(){
+    private void Chat_page(){
 
         while(true){
             System.out.println("----------------------------------------");
             System.out.println("\tEnter the number of your chosen task.");
-            System.out.println("\t\t1- Start chat with a person");
-            System.out.println("\t\t2- Select a chat");
+            System.out.println("\t\t1- Start Chat with a person");
+            System.out.println("\t\t2- Select a Chat");
             System.out.println("\t\t3- Back");
             System.out.println("----------------------------------------");
 
-            int user_chats_int = scanner.nextInt();
-            switch (user_chats_int){
+            int user_Chats_int = scanner.nextInt();
+            switch (user_Chats_int){
                 case 1:
-                    start_chat_with_a_person();
+                    start_Chat_with_a_person();
                     break;
                 case 2:
-                    select_chat();
+                    select_Chat();
                     break;
                 case 3:
                     main_menu();
@@ -549,7 +549,7 @@ public class Media {
         }
     }
 
-    private void start_chat_with_a_person(){
+    private void start_Chat_with_a_person(){
         while (true){
             System.out.print("\tEnter username of who you want to start Chat with.(Enter <back> to back.): ");
             scanner.nextLine();

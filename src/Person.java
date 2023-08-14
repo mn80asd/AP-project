@@ -6,7 +6,7 @@ public class Person {
     public ArrayList<Post> person_posts = new ArrayList<>();
     public ArrayList<Person> followers = new ArrayList<>();
     public ArrayList<Person> followings = new ArrayList<>();
-    public ArrayList<Chat> all_person_chats = new ArrayList<>();
+    public ArrayList<Chat> all_person_Chats = new ArrayList<>();
     public ArrayList<Person> blocked_users = new ArrayList<>();
 
     public String getName() {
@@ -26,22 +26,22 @@ public class Person {
         this.bio = bio;
     }
     public void showAllUserChats(){
-        for (Chat c: all_person_chats) {
+        for (Chat c: all_person_Chats) {
             System.out.println("        "+c.getId()+ "-    "+c.getReceiver().name);
         }
     }
 
-    public Chat getChatById(int id_to_get_chat){
-        for (Chat c: all_person_chats) {
-            if(c.getId() == id_to_get_chat){
+    public Chat getChatById(int id_to_get_Chat){
+        for (Chat c: all_person_Chats) {
+            if(c.getId() == id_to_get_Chat){
                 return c;
             }
         }
         return null;
     }
 
-    public boolean addChatToUserChats(Chat chat_to_add){
-        all_person_chats.add(chat_to_add);
+    public boolean addChatToUserChats(Chat Chat_to_add){
+        all_person_Chats.add(Chat_to_add);
         return true;
     }
     public boolean addPersonToBlockList(Person person_to_block){
