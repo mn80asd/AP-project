@@ -336,6 +336,7 @@ public class main {
             }
         }
     }
+
     private void startChatWithAPerson(){
         Scanner myscanner = new Scanner(System.in);
         while (true){
